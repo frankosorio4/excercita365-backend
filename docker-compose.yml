@@ -1,0 +1,52 @@
+version: '3.8'
+
+services: 
+  exerciseopenair-api:
+    container_name: exerciseopenair-api
+    build: 
+      context: .
+      args:
+        - APP_PORT_LOCAL=${APP_PORT_LOCAL}
+        - APP_PORT_DOCKER=${APP_PORT_DOCKER}
+    image: exerciseopenair-api:latest        
+    ports:
+      - "${APP_PORT_LOCAL}:${APP_PORT_DOCKER}"
+    environment: 
+      - EXTERNAL_PORT=${APP_PORT_LOCAL}
+      - PGDATABASE=${DB_DATABASE}
+      - PGUSER=${DB_USER}
+      - PGPASSWORD=${DB_PASSWORD}
+      - PGHOST=${DB_HOST}
+    depends_on: 
+      - exerciseopenair-db
+    networks:
+      - openair-network
+    restart: unless-stopped
+
+
+  exerciseopenair-db: 
+    container_name: exerciseopenair-db
+    image: postgres:16.1-alpine
+    ports:
+      - "${DB_PORT}:${DB_PORT}"
+    environment: 
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_DATABASE}
+    volumes:
+      - nps_data:/var/lib/postgresql/data
+    networks:
+      - openair-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER}"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+volumes:
+  nps_data: {}
+
+networks:
+  openair-network:
+    driver: bridge
