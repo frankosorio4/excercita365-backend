@@ -7,6 +7,9 @@ const Usuario = connection.define('usuarios', {
     nome: {
         type: DataTypes.STRING,
     },
+    sexo: {
+        type: DataTypes.STRING,
+    },
     cpf: {
         type: DataTypes.STRING
     },
@@ -16,7 +19,7 @@ const Usuario = connection.define('usuarios', {
     email: {
         type: DataTypes.STRING
     },
-    password_hash: {
+    password: {
         type: DataTypes.STRING
     },
     cep: {
@@ -25,17 +28,20 @@ const Usuario = connection.define('usuarios', {
     logradouro: {
         type: DataTypes.STRING
     },
-    municipio: {
+    bairro: {
         type: DataTypes.STRING
     },
-    uf: {
+    cidade: {
         type: DataTypes.STRING
+    },
+    estado: {
+        type: DataTypes.STRING
+    },
+    numeroCasa: {
+        type: DataTypes.INTEGER
     },
     complemento: {
         type: DataTypes.STRING
-    },
-    numero: {
-        type: DataTypes.INTEGER
     },
     isOnline: {
         type: DataTypes.BOOLEAN
