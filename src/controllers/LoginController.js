@@ -17,7 +17,7 @@ class LoginController {
                 return res.status(404).json({ mensagem: 'Conta não encontrada' })
             }
 
-            if (!compareSync(dados.password, usuario.password_hash)) {
+            if (!compareSync(dados.password, usuario.password)) {
                 return res.status(401).json({ mensagem: 'Email ou senha inválido' })
             }
 
