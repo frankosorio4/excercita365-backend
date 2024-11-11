@@ -28,7 +28,7 @@ module.exports = {
       },
       {
         nome: 'Jane Smith',
-        cpf: '98765432100',
+        cpf: '98765432101',
         sexo: 'Feminino',
         dataNascimento: '1992-02-02',
         email: 'jane.smith@example.com',
