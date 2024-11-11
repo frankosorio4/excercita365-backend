@@ -1,5 +1,7 @@
 const padraoEmail = new RegExp(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
 const padraoDataNascimento = /^\d{4}-\d{2}-\d{2}$/;
+const padraoCPF = new RegExp(/^\d{11}$/);
+const padraoCEP = new RegExp(/^\d{8}$/);
 const Usuario = require("../models/Usuario");
 const Local = require("../models/Local");
 const Atividade = require("../models/Atividade");
@@ -9,10 +11,10 @@ class UsuarioController {
         try {
             const dados = request.body;
 
-            if (!dados.nome) {
-                return response
-                    .status(400)
-                    .json({ mensagem: "O nome é obrigatório" });
+            if (!dados.nome || !dados.sexo || !dados.cpf || !dados.dataNascimento || !dados.email || !dados.password || !dados.cep || !dados.logradouro || !dados.bairro || !dados.cidade || !dados.estado) {
+                return response.
+                    status(400).
+                    json({ mensagem: 'Um o mais dados faltantes. O nome, sexo, cpf, email, password, cep, logradouro, bairro, cidade, estado e data de nascimento são obrigatórios.' })
             }
 
             if (typeof dados.nome !== "string") {
@@ -21,10 +23,17 @@ class UsuarioController {
                     .json({ mensagem: "O nome deve ser uma string" });
             }
 
-            if (!(dados.cpf?.length === 11)) {
+            const valoresSexo = ['Masculino', 'Feminino', 'Nao especificado'];
+            if (!valoresSexo.includes(dados.sexo)) {
                 return response
                     .status(400)
-                    .json({ mensagem: "O CPF deve ter 11 digitos" });
+                    .json({ mensagem: 'O valor de sexo é inválido. Os valores permitidos são: \"Masculino\", \"Feminino\", ou \"Nao especificado\".' })
+            }
+
+            if (!padraoCPF.test(dados.cpf)) {
+                return response
+                    .status(400)
+                    .json({ mensagem: 'O CPF deve conter somente números e ter 11 dígitos.' });
             }
 
             if (padraoDataNascimento.test(dados.dataNascimento) === false) {
@@ -34,28 +43,10 @@ class UsuarioController {
                 });
             }
 
-            if (!dados.dataNascimento) {
-                return response
-                    .status(400)
-                    .json({ mensagem: "A data de nascimento é obrigatória" });
-            }
-
-            if (!dados.email) {
-                return response
-                    .status(400)
-                    .json({ mensagem: "O email é obrigatório" });
-            }
-
             if (padraoEmail.test(dados.email) === false) {
                 return response
                     .status(400)
                     .json({ mensagem: "O email está no formato inválido" });
-            }
-
-            if (!dados.password) {
-                return response
-                    .status(400)
-                    .json({ mensagem: "A senha é obrigatória" });
             }
 
             if (
@@ -66,28 +57,10 @@ class UsuarioController {
                 });
             }
 
-            if (!(dados.cep?.length === 8)) {
+            if (!padraoCEP.test(dados.cep)) {
                 return response
                     .status(400)
-                    .json({ mensagem: "O CEP deve ter 8 digitos" });
-            }
-
-            if (!dados.logradouro) {
-                return response
-                    .status(400)
-                    .json({ mensagem: "O logradouro é obrigatório" });
-            }
-
-            if (!dados.municipio) {
-                return response
-                    .status(400)
-                    .json({ mensagem: "O município é obrigatório" });
-            }
-
-            if (!dados.uf) {
-                return response
-                    .status(400)
-                    .json({ mensagem: "O UF é obrigatório" });
+                    .json({ mensagem: 'O CEP deve conter somente números e ter 8 dígitos.' });
             }
 
             const emailExistente = await Usuario.findOne({
@@ -116,14 +89,19 @@ class UsuarioController {
 
             const usuario = await Usuario.create({
                 nome: dados.nome,
+                sexo: dados.sexo,
                 cpf: dados.cpf,
                 dataNascimento: dados.dataNascimento,
                 email: dados.email,
-                password_hash: dados.password,
+                password: dados.password,
                 cep: dados.cep,
                 logradouro: dados.logradouro,
-                municipio: dados.municipio,
-                uf: dados.uf
+                bairro: dados.bairro,
+                cidade: dados.cidade,
+                estado: dados.estado,
+                numeroCasa: dados.numeroCasa,
+                complemento: dados.complemento,
+                isOnline: dados.isOnline
             });
 
             response.status(201).json({
@@ -135,7 +113,7 @@ class UsuarioController {
         } catch (error) {
             console.log(error)
             response.status(500).json({
-                mensagem: "Não possível criar a conta: ",
+                mensagem: "Não foi possivel criar a conta: ",
                 error,
             });
         }

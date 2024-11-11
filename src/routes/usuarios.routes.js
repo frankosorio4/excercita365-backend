@@ -13,20 +13,23 @@ usuariosRoutes.post(
     #swagger.description = 'Cadastra um novo usuário'
     #swagger.parameters['obj'] = {
         in: 'body',
-        description: 'Informe os dados do usuário',
+        description: 'Informe os dados do usuário ou use o exemplo',
         required: true,
         schema: { 
-            $nome: 'Nome do Usuário',
-            $cpf: 'CPF padrão 00000000000',
-            $dataNascimento: 'Data de Nascimento padração YYYY-MM-DD',
+            $nome: 'usuario teste',
+            $sexo: 'Masculino',
+            $cpf: '11122233344',
+            $dataNascimento: '2000-01-01',
             $email: 'email@email.com',
-            $password: 'Senha min 8 caracteres',
-            $cep: 'CEP 8 digitos',
+            $password: '12345678',
+            $cep: '88047600',
             $logradouro: 'Logradouro',
-            $municipio: 'Município',
-            $uf: 'UF',
-            $complemento: 'Complemento',
-            $numero: 'Numero'
+            $bairro: 'Bairro Centro',
+            $cidade: 'Florianópolis',
+            $estado: 'SC',
+            $numeroCasa: '100',
+            $complemento: '1a',
+            $isaOnline: 'false'
         }
     }
     #swagger.responses[201] = {
@@ -41,14 +44,8 @@ usuariosRoutes.post(
     #swagger.responses[400] = { 
         description: 'Bad Request',
         schema: {
-                message: "O nome é obrigatório"
+                message: "Um o mais dados faltantes. O nome, sexo, cpf, email, password, cep, logradouro, bairro, cidade, estado e data de nascimento são obrigatórios."
             }
-    } 
-    #swagger.responses[401] = { 
-        description: 'Unauthorized',
-        schema: {
-                message: 'O Token está inválido ou expirado'
-            } 
     }
     #swagger.responses[409] = {
         description: 'Conflict',
@@ -59,7 +56,7 @@ usuariosRoutes.post(
     #swagger.responses[500] = {
         description: 'Internal Server Error',
         schema: {
-                mensagem: 'Não possível criar a conta'
+                mensagem: 'Não foi possivel criar a conta'
             }
     }                               
     */

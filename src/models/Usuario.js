@@ -52,7 +52,7 @@ const Usuario = connection.define('usuarios', {
  Usuario.hasMany(Local);
 
 Usuario.beforeSave((usuario) => {
-    usuario.password_hash = hashSync(usuario.password_hash, 10)
+    usuario.password = hashSync(usuario.password, 10)
     return usuario
 })
 
