@@ -93,6 +93,52 @@ usuariosRoutes.get("/",
     */
 );
 
+usuariosRoutes.put("/",
+    UsuarioController.atualizarUsuarios
+    /* 
+    #swagger.tags = ['Usuário']
+    #swagger.path = '/usuarios'
+    #swagger.method = 'put'
+    #swagger.description = 'Atualiza o usuário quando passado o id como params'
+    #swagger.parameters['obj'] = {
+        in: 'body',
+        description: 'Informe os dados do usuário a modificar ou use o exemplo. Apague os dados que não deseja modificar',
+        required: true,
+        schema: { 
+            $nome: 'usuario modificado',
+            $sexo: 'Masculino',
+            $dataNascimento: '2000-01-01',
+            $email: 'emailModificado@email.com',
+            $password: '12345678',
+        }
+    }
+    #swagger.responses[200] = {
+        description: 'OK',
+        schema: {
+                message: 'Usuário atualizado com sucesso'
+            }  
+    }
+    #swagger.responses[401] = { 
+        description: 'Unauthorized',
+        schema: {
+                message: 'O Token está inválido ou expirado'
+            } 
+    }
+    #swagger.responses[404] = {
+        description: 'Not Found',
+        schema: {
+                message: 'Usuário não encontrado'
+            }  
+    }
+    #swagger.responses[500] = {
+        description: 'Internal Server Error',
+        schema: {
+                message: 'Erro ao atualizar o usuário'
+            }         
+    }
+    */
+);
+
 usuariosRoutes.delete("/:id",
     UsuarioController.deletarUsuarios
     /* 
@@ -136,44 +182,5 @@ usuariosRoutes.delete("/:id",
     */
 );
 
-usuariosRoutes.put("/:id",
-    UsuarioController.atualizarUsuarios
-    /* 
-    #swagger.tags = ['Usuário']
-    #swagger.path = '/usuarios/{userID}'
-    #swagger.method = 'put'
-    #swagger.description = 'Atualiza o usuário quando passado o id como params'
-    #swagger.parameters['userID'] = {
-        in: 'path',
-        description: 'ID do usuario',
-        required: true,
-        type: 'integer'
-    }
-    #swagger.responses[200] = {
-        description: 'OK',
-        schema: {
-                message: 'Usuário atualizado com sucesso'
-            }  
-    }
-    #swagger.responses[401] = { 
-        description: 'Unauthorized',
-        schema: {
-                message: 'O Token está inválido ou expirado'
-            } 
-    }
-    #swagger.responses[404] = {
-        description: 'Not Found',
-        schema: {
-                message: 'Usuário não encontrado'
-            }  
-    }
-    #swagger.responses[500] = {
-        description: 'Internal Server Error',
-        schema: {
-                message: 'Erro ao atualizar o usuário'
-            }         
-    }
-    */
-);
 
 module.exports = usuariosRoutes;

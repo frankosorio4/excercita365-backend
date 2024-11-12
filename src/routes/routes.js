@@ -19,7 +19,7 @@ routes.use('/login', loginRoutes);
 routes.use('/cadastrar', cadastrarRoutes);
 
 // Rotas Privadas
-routes.use('/usuarios', usuariosRoutes);
+routes.use('/usuarios',validaToken, usuariosRoutes);//add permission to access all the users
 routes.use('/locais', validaToken, localRoutes);
 routes.use('/atividades', validaToken, atividadeRoutes);
 
