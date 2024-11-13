@@ -41,7 +41,8 @@ const Local = connection.define('locais', {
 Local.belongsToMany(Atividade, { 
     through: LocalAtividade,
     foreignKey: 'localId',
-    otherKey: 'atividadeId'
+    otherKey: 'atividadeId',
+    onDelete: 'CASCADE'
 });
 
 Atividade.belongsToMany(Local, { 

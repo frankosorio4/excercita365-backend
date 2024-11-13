@@ -231,34 +231,30 @@ class UsuarioController {
 
     async deletarUsuarios(request, response) {
         try {
-            const userID = request.params.id;
+            const userID = request.usuarioId;// ID from valida token
             const usuario = await Usuario.findByPk(userID);
 
             const localCadastrado = await Local.findAll({
                 where: { usuarioId: userID },
             });
 
-            if (!userID) {
-                return response.status(400).json({
-                    message: "É necessário passar o ID como route params",
-                });
-            }
-
             if (!usuario) {
                 return response.status(404).json({
                     message: "Usuário não encontrado",
                 });
             }
-
+            
             if (localCadastrado.length > 0) {
                 return response.status(400).json({
                     message:
-                        "O usuário não pode ser deletado, possui locais cadastrados",
+                    "O usuário não pode ser deletado, possui locais cadastrados",
                 });
             }
 
             await usuario.destroy();
             return response.status(204).json();
+            //Validation of the logout of the user
+
         } catch (error) {
             return response.status(500).json({
                 mensagem: "Erro ao deletar o usuário",

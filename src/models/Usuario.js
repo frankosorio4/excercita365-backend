@@ -48,8 +48,8 @@ const Usuario = connection.define('usuarios', {
     }
 })
 
- Local.belongsTo(Usuario);
- Usuario.hasMany(Local);
+Local.belongsTo(Usuario, { onDelete: 'CASCADE' });
+Usuario.hasMany(Local, { onDelete: 'CASCADE' });
 
 Usuario.beforeSave((usuario) => {
     usuario.password = hashSync(usuario.password, 10)
