@@ -17,6 +17,10 @@ module.exports = {
           type: Sequelize.STRING(100),
           allowNull: false
         },
+        sexo: {
+          type: Sequelize.STRING,
+          allowNull: false
+        },
         cpf: {
           type: Sequelize.STRING(11),
           allowNull: false
@@ -30,35 +34,37 @@ module.exports = {
           allowNull: false,
           unique: true
         },
-        password_hash : { 
-          type: Sequelize.STRING,
-          allowNull: false
-        },
-        confirma_password_hash : {
+        password : { 
           type: Sequelize.STRING,
           allowNull: false
         },
         cep: {
-          type: Sequelize.STRING,
+          type: Sequelize.STRING(11),
           allowNull: false
         },
         logradouro: {
           type: Sequelize.STRING,
           allowNull: false
         },
-        municipio: {
+        bairro: {
           type: Sequelize.STRING,
           allowNull: false
         },
-        uf: {
+        cidade: {
           type: Sequelize.STRING,
           allowNull: false
+        },
+        estado: {
+          type: Sequelize.STRING,
+          allowNull: false
+        },
+        numeroCasa: {
+          type: Sequelize.STRING,
+          allowNull: true
         },
         complemento: {
-          type: Sequelize.STRING
-        },
-        numero: {
-          type: Sequelize.STRING
+          type: Sequelize.STRING,
+          allowNull: true
         },
         isOnline: {
           type: Sequelize.BOOLEAN,
@@ -72,6 +78,8 @@ module.exports = {
           allowNull: false,
           type: Sequelize.DATE
         },
+        deleteAt:{
+          type: Sequelize.DATE}
       }
      )
   },

@@ -1,11 +1,11 @@
 const Local = require("../models/Local");
 const Usuario = require("../models/Usuario");
 const Atividade = require("../models/Atividade");
+const LocalAtividade = require("../models/LocalAtividade");
 const {
   getLatitudeLongitude,
   getLinkGoogleMaps,
 } = require("../services/mapaService");
-const LocalAtividade = require("../models/LocalAtividade");
 const { Op } = require("sequelize");
 
 class LocalController {
@@ -148,7 +148,6 @@ class LocalController {
       });
     }
   }
-
   async pegarUrlMapa(request, response) {
     try {
       const { id } = request.params;
@@ -174,7 +173,6 @@ class LocalController {
       });
     }
   }
-
   async deletarLocal(request, response) {
     try {
       const { id } = request.params;
@@ -186,6 +184,8 @@ class LocalController {
           message: "Local não encontrado",
         });
       }
+
+      await LocalAtividade.destroy({ where: { localId: id } });//asociate activity
 
       await Local.destroy({ where: { id } });
 

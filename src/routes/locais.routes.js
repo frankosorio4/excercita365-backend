@@ -3,8 +3,7 @@ const LocalController = require("../controllers/LocalController");
 
 const localRoutes = new Router();
 
-localRoutes.post(
-  "/",
+localRoutes.post("/",
   LocalController.cadastrarLocal
   /* 
     #swagger.tags = ['Local']
@@ -66,8 +65,7 @@ localRoutes.post(
     */
 );
 
-localRoutes.get(
-  "/usuario/:id",
+localRoutes.get("/usuario/:id",
   LocalController.listarLocaisPorUsuario
   /* 
     #swagger.tags = ['Local']
@@ -98,8 +96,7 @@ localRoutes.get(
     */
 );
 
-localRoutes.get(
-  "/:id",
+localRoutes.get("/:id",
   LocalController.listarPorId
   /* 
     #swagger.tags = ['Local']
@@ -130,8 +127,7 @@ localRoutes.get(
     */
 );
 
-localRoutes.get(
-  "/:id/maps",
+localRoutes.get("/:id/maps",
   LocalController.pegarUrlMapa
   /*
     #swagger.tags = ['Local']
