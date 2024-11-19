@@ -1,3 +1,5 @@
+const padraoCEP = new RegExp(/^\d{8}$/);
+
 const Local = require("../models/Local");
 const Usuario = require("../models/Usuario");
 const Atividade = require("../models/Atividade");
@@ -13,42 +15,54 @@ class LocalController {
     try {
       const dados = request.body;
 
-      if (!dados.nome) {
+      if (!dados.nome || !dados.cep || !dados.logradouro || !dados.bairro || !dados.cidade || !dados.estado) {
         return response
           .status(400)
-          .json({ mensagem: "O nome do local é obrigatório" });
+          .json({ mensagem: "Um o mains dados faltantes. O nome do local, cep, logradouro, bairro, cidade e estado são obrigatórios" });
       }
 
-      if (!dados.cep) {
-        return response.status(400).json({ mensagem: "O CEP é obrigatório" });
-      }
-
-      if (!dados.logradouro) {
+      if (!isNaN(dados.nome)) {
         return response
           .status(400)
-          .json({ mensagem: "O logradouro é obrigatório" });
+          .json({ mensagem: 'O nome do local não pode ser numérico.' })
       }
 
-      if (!dados.municipio) {
+      if (!padraoCEP.test(dados.cep)) {
         return response
           .status(400)
-          .json({ mensagem: "O municipio é obrigatório" });
+          .json({ mensagem: 'O CEP deve conter somente números e ter 8 dígitos.' });
       }
 
-      if (!dados.uf) {
-        return response.status(400).json({ mensagem: "O UF é obrigatório" });
+      if (isNaN(dados.numeroCasa)) {
+        return response
+          .status(400)
+          .json({ mensagem: 'O número da casa deve ser numérico.' });
       }
 
-      //validar latitude e longitude
+      let lat, lng;
 
-      const { lat, lng } = await getLatitudeLongitude(dados.cep);
+      if (!dados.latitude || !dados.longitude) {
+        ({ lat, lng } = await getLatitudeLongitude(dados.cep));
+      } else {
+        if (dados.latitude < -90 || dados.latitude > 90 || isNaN(dados.latitude)) {
+          return response
+          .status(400)
+          .json({ mensagem: 'A latitude deve estar entre -90 e 90 degraus' });
+        }
+        if (dados.longitude < -180 || dados.longitude > 180 || isNaN(dados.longitude)) {
+          return response
+          .status(400)
+          .json({ mensagem: 'A longitude deve estar entre -180 e 180 degraus' });
+        }
+        lat = dados.latitude;
+        lng = dados.longitude;
+      }
 
       const linkGoogleMaps = await getLinkGoogleMaps({ lat, lng });
 
       const local = await Local.create({
         ...dados,
         usuarioId: parseInt(request.usuarioId),
-        // usuarioId: parseInt(usuario.id),
         latitude: lat,
         longitude: lng,
         linkmap: linkGoogleMaps,
