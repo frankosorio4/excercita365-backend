@@ -16,11 +16,17 @@ const Local = connection.define('locais', {
     logradouro: {
         type: DataTypes.STRING
     },
-    municipio: {
+    bairro: {
         type: DataTypes.STRING
     },
-    uf: {
+    cidade: {
         type: DataTypes.STRING
+    },
+    estado: {
+        type: DataTypes.STRING
+    },
+    numeroCasa: {
+        type: DataTypes.INTEGER
     },
     latitude: {
         type: DataTypes.STRING
