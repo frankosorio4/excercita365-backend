@@ -86,6 +86,12 @@ class UsuarioController {
                     .json({ mensagem: "CPF já cadastrado" });
             }
 
+            if (isNaN(dados.numeroCasa)) {
+                return response
+                    .status(400)
+                    .json({ mensagem: 'O número da casa deve ser numérico.' });
+            }
+
             const usuario = await Usuario.create({
                 nome: dados.nome,
                 sexo: dados.sexo,
