@@ -7,6 +7,9 @@ const Usuario = connection.define('usuarios', {
     nome: {
         type: DataTypes.STRING,
     },
+    sexo: {
+        type: DataTypes.STRING,
+    },
     cpf: {
         type: DataTypes.STRING
     },
@@ -16,7 +19,7 @@ const Usuario = connection.define('usuarios', {
     email: {
         type: DataTypes.STRING
     },
-    password_hash: {
+    password: {
         type: DataTypes.STRING
     },
     cep: {
@@ -25,28 +28,31 @@ const Usuario = connection.define('usuarios', {
     logradouro: {
         type: DataTypes.STRING
     },
-    municipio: {
+    bairro: {
         type: DataTypes.STRING
     },
-    uf: {
+    cidade: {
         type: DataTypes.STRING
+    },
+    estado: {
+        type: DataTypes.STRING
+    },
+    numeroCasa: {
+        type: DataTypes.INTEGER
     },
     complemento: {
         type: DataTypes.STRING
-    },
-    numero: {
-        type: DataTypes.INTEGER
     },
     isOnline: {
         type: DataTypes.BOOLEAN
     }
 })
 
- Local.belongsTo(Usuario);
- Usuario.hasMany(Local);
+Local.belongsTo(Usuario, { onDelete: 'CASCADE' });
+Usuario.hasMany(Local, { onDelete: 'CASCADE' });
 
 Usuario.beforeSave((usuario) => {
-    usuario.password_hash = hashSync(usuario.password_hash, 10)
+    usuario.password = hashSync(usuario.password, 10)
     return usuario
 })
 

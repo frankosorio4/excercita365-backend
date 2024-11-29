@@ -25,13 +25,19 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      municipio: {
-        type: Sequelize.STRING,
-        allowNull: false
+      bairro: {
+        type: Sequelize.STRING
       },
-      uf: {
+      cidade: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+      },
+      estado: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      numeroCasa: {
+        type: Sequelize.INTEGER,
       },
       latitude: {
         type: Sequelize.STRING

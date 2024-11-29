@@ -16,11 +16,17 @@ const Local = connection.define('locais', {
     logradouro: {
         type: DataTypes.STRING
     },
-    municipio: {
+    bairro: {
         type: DataTypes.STRING
     },
-    uf: {
+    cidade: {
         type: DataTypes.STRING
+    },
+    estado: {
+        type: DataTypes.STRING
+    },
+    numeroCasa: {
+        type: DataTypes.INTEGER
     },
     latitude: {
         type: DataTypes.STRING
@@ -41,7 +47,8 @@ const Local = connection.define('locais', {
 Local.belongsToMany(Atividade, { 
     through: LocalAtividade,
     foreignKey: 'localId',
-    otherKey: 'atividadeId'
+    otherKey: 'atividadeId',
+    onDelete: 'CASCADE'
 });
 
 Atividade.belongsToMany(Local, { 

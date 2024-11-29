@@ -8,7 +8,8 @@
   "host": "localhost:3000",
   "basePath": "/",
   "schemes": [
-    "http"
+    "http",
+    "https"
   ],
   "securityDefinitions": {
     "apiKeyAuth": {
@@ -19,405 +20,18 @@
     }
   },
   "paths": {
-    "/usuarios": {
-      "post": {
-        "tags": [
-          "Usuário"
-        ],
-        "description": "Cadastra um novo usuário",
-        "parameters": [
-          {
-            "name": "obj",
-            "in": "body",
-            "description": "Informe os dados do usuário",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "nome": {
-                  "type": "string",
-                  "example": "Nome do Usuário"
-                },
-                "cpf": {
-                  "type": "string",
-                  "example": "CPF padrão 00000000000"
-                },
-                "dataNascimento": {
-                  "type": "string",
-                  "example": "Data de Nascimento padração YYYY-MM-DD"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "email@email.com"
-                },
-                "password": {
-                  "type": "string",
-                  "example": "Senha min 8 caracteres"
-                },
-                "cep": {
-                  "type": "string",
-                  "example": "CEP 8 digitos"
-                },
-                "logradouro": {
-                  "type": "string",
-                  "example": "Logradouro"
-                },
-                "municipio": {
-                  "type": "string",
-                  "example": "Município"
-                },
-                "uf": {
-                  "type": "string",
-                  "example": "UF"
-                },
-                "complemento": {
-                  "type": "string",
-                  "example": "Complemento"
-                },
-                "numero": {
-                  "type": "string",
-                  "example": "Numero"
-                }
-              },
-              "required": [
-                "nome",
-                "cpf",
-                "dataNascimento",
-                "email",
-                "password",
-                "cep",
-                "logradouro",
-                "municipio",
-                "uf",
-                "complemento",
-                "numero"
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Usuário criado com sucesso",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "Conta criada com sucesso"
-                },
-                "nome": {
-                  "type": "string",
-                  "example": "nome do usuario"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "email do usuario"
-                },
-                "createdAt": {
-                  "type": "string",
-                  "example": "Data de criacao da conta"
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "O nome é obrigatório"
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "O Token está inválido ou expirado"
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
-          },
-          "409": {
-            "description": "Conflict",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "Email já cadastrado"
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "mensagem": {
-                  "type": "string",
-                  "example": "Não possível criar a conta"
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
-          }
-        }
-      },
+    "/dashboard": {
       "get": {
         "tags": [
-          "Usuário"
+          "dashboard"
         ],
-        "description": "Lista todos os usuários",
+        "description": "End Point para lista todos os locais sem estar logado.",
         "responses": {
           "200": {
             "description": "OK"
           },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "O Token está inválido ou expirado"
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "Usuário não encontrado"
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
-          },
           "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "Erro ao buscar os usuários"
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/usuarios/{userID}": {
-      "delete": {
-        "tags": [
-          "Usuário"
-        ],
-        "description": "Deleta o usuário quando passado o id como params",
-        "parameters": [
-          {
-            "name": "userID",
-            "in": "path",
-            "required": true,
-            "type": "integer",
-            "description": "ID do usuario"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad request",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "É necessário passar o ID como route params"
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "O Token está inválido ou expirado"
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "Usuário não encontrado"
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "Erro ao deletar o usuário"
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Usuário"
-        ],
-        "description": "Atualiza o usuário quando passado o id como params",
-        "parameters": [
-          {
-            "name": "userID",
-            "in": "path",
-            "required": true,
-            "type": "integer",
-            "description": "ID do usuario"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "nome": {
-                  "example": "any"
-                },
-                "email": {
-                  "example": "any"
-                },
-                "password": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "Usuário atualizado com sucesso"
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "O Token está inválido ou expirado"
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "Usuário não encontrado"
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "Erro ao atualizar o usuário"
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
+            "description": "Erro ao listar os locais"
           }
         }
       }
@@ -588,18 +202,428 @@
         }
       }
     },
-    "/dashboard": {
+    "/cadastrar": {
+      "post": {
+        "tags": [
+          "Cadastrar"
+        ],
+        "description": "Cadastra um novo usuário",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Informe os dados do usuário ou use o exemplo",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": "string",
+                  "example": "usuario teste"
+                },
+                "sexo": {
+                  "type": "string",
+                  "example": "Masculino"
+                },
+                "cpf": {
+                  "type": "string",
+                  "example": "11122233344"
+                },
+                "dataNascimento": {
+                  "type": "string",
+                  "example": "2000-01-01"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "email@email.com"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "12345678"
+                },
+                "cep": {
+                  "type": "string",
+                  "example": "88047600"
+                },
+                "logradouro": {
+                  "type": "string",
+                  "example": "Logradouro"
+                },
+                "bairro": {
+                  "type": "string",
+                  "example": "Bairro Centro"
+                },
+                "cidade": {
+                  "type": "string",
+                  "example": "Florianópolis"
+                },
+                "estado": {
+                  "type": "string",
+                  "example": "SC"
+                },
+                "numeroCasa": {
+                  "type": "string",
+                  "example": "100"
+                },
+                "complemento": {
+                  "type": "string",
+                  "example": "1a"
+                },
+                "isaOnline": {
+                  "type": "string",
+                  "example": "false"
+                }
+              },
+              "required": [
+                "nome",
+                "sexo",
+                "cpf",
+                "dataNascimento",
+                "email",
+                "password",
+                "cep",
+                "logradouro",
+                "bairro",
+                "cidade",
+                "estado",
+                "numeroCasa",
+                "complemento",
+                "isaOnline"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Usuário criado com sucesso",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Conta criada com sucesso"
+                },
+                "nome": {
+                  "type": "string",
+                  "example": "nome do usuario"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "email do usuario"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "example": "Data de criacao da conta"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Um o mais dados faltantes. O nome, sexo, cpf, email, password, cep, logradouro, bairro, cidade, estado e data de nascimento são obrigatórios."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Email já cadastrado"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "mensagem": {
+                  "type": "string",
+                  "example": "Não foi possivel criar a conta"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/usuarios": {
       "get": {
         "tags": [
-          "dashboard"
+          "Usuário"
         ],
-        "description": "End Point para lista todos os locais sem estar logado.",
+        "description": "Lista todos os usuários.",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
           },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "O Token está inválido ou expirado"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Usuário não encontrado"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
           "500": {
-            "description": "Erro ao listar os locais"
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Erro ao buscar os usuários"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Usuário"
+        ],
+        "description": "Atualiza o usuário que esta logado",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Informe os campos do usuário que deseja modificar. Use o exemplo embaixo e apague os dados que não deseja modificar",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": "string",
+                  "example": "usuario modificado"
+                },
+                "sexo": {
+                  "type": "string",
+                  "example": "Masculino"
+                },
+                "dataNascimento": {
+                  "type": "string",
+                  "example": "2000-01-01"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "emailModificado@email.com"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "12345678"
+                }
+              },
+              "required": [
+                "nome",
+                "sexo",
+                "dataNascimento",
+                "email",
+                "password"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Usuário atualizado com sucesso"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "O Token está inválido ou expirado"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Usuário não encontrado"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Erro ao atualizar o usuário"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Usuário"
+        ],
+        "description": "Permite deletar a conta do usuário logado",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "É necessário passar o ID como route params"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "O Token está inválido ou expirado"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Usuário não encontrado"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Erro ao deletar o usuário"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           }
         }
       }
@@ -619,34 +643,54 @@
           {
             "name": "obj",
             "in": "body",
-            "description": "Informe os dados do local",
+            "description": "Informe os dados do local, pode apagar os datos não obrigatórios",
             "required": true,
             "schema": {
               "type": "object",
               "properties": {
                 "nome": {
                   "type": "string",
-                  "example": "Local teste"
+                  "example": "Local a ser cadastrado"
                 },
                 "descricao": {
                   "type": "string",
-                  "example": "descricao local teste"
+                  "example": "descricao local a ser cadastrado"
                 },
                 "cep": {
                   "type": "string",
-                  "example": "88047470"
+                  "example": "88047580"
                 },
                 "logradouro": {
                   "type": "string",
-                  "example": "logradouro teste"
+                  "example": "logradouro do local"
                 },
                 "municipio": {
                   "type": "string",
-                  "example": "municipio teste"
+                  "example": "municipio do local"
                 },
-                "uf": {
+                "bairro": {
                   "type": "string",
-                  "example": "SC"
+                  "example": "bairro do local"
+                },
+                "cidade": {
+                  "type": "string",
+                  "example": "cidade do local"
+                },
+                "estado": {
+                  "type": "string",
+                  "example": "estado do local"
+                },
+                "numeroCasa": {
+                  "type": "string",
+                  "example": "não obrigatorio"
+                },
+                "latitude": {
+                  "type": "string",
+                  "example": "não requerido"
+                },
+                "longitude": {
+                  "type": "string",
+                  "example": "não obrigatorio"
                 },
                 "atividades": {
                   "type": "object",
@@ -696,7 +740,12 @@
                 "cep",
                 "logradouro",
                 "municipio",
-                "uf",
+                "bairro",
+                "cidade",
+                "estado",
+                "numeroCasa",
+                "latitude",
+                "longitude",
                 "atividades"
               ]
             }
@@ -782,16 +831,13 @@
         }
       }
     },
-    "/locais/usuario/{id}": {
+    "/locais/usuario": {
       "get": {
-        "description": "",
+        "tags": [
+          "Local"
+        ],
+        "description": "Lista todos os locais do usuario logado",
         "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
           {
             "name": "authorization",
             "in": "header",
@@ -800,16 +846,37 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
+            "description": "Retorna lista de locais pelo id do usuario"
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "O Token está inválido ou expirado"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "mensagem": {
+                  "type": "string",
+                  "example": "Erro ao buscar os locais"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           }
         }
       }
@@ -835,7 +902,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Retorna lista de locais pelo id"
+            "description": "Retorna o local pelo id"
           },
           "400": {
             "description": "Not Found",
@@ -887,78 +954,6 @@
           }
         }
       },
-      "delete": {
-        "tags": [
-          "Local"
-        ],
-        "description": "Deleta um local pelo id do local",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "O Token está inválido ou expirado"
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "Local não encontrado"
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "mensagem": {
-                  "type": "string",
-                  "example": "Erro ao excluir o local: "
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
-          }
-        }
-      },
       "put": {
         "tags": [
           "Local"
@@ -979,7 +974,7 @@
           {
             "name": "obj",
             "in": "body",
-            "description": "Modifique os campos do local a modificar",
+            "description": "Modifique os campos do local e apague os campos que não deseja modificar",
             "required": true,
             "schema": {
               "type": "object",
@@ -1000,13 +995,33 @@
                   "type": "string",
                   "example": "logradouro modificado"
                 },
-                "municipio": {
+                "bairro": {
                   "type": "string",
-                  "example": "municipio modificado"
+                  "example": "bairro modificado"
                 },
-                "uf": {
+                "cidade": {
                   "type": "string",
-                  "example": "SC"
+                  "example": "cidade modificado"
+                },
+                "estado": {
+                  "type": "string",
+                  "example": "estado modificado"
+                },
+                "numeroCasa": {
+                  "type": "string",
+                  "example": "numero modificado"
+                },
+                "latitude": {
+                  "type": "string",
+                  "example": "latitude modificada"
+                },
+                "longitude": {
+                  "type": "string",
+                  "example": "longitude modificada"
+                },
+                "linkmap": {
+                  "type": "string",
+                  "example": "linkmap modificado"
                 },
                 "atividades": {
                   "type": "object",
@@ -1055,8 +1070,13 @@
                 "descricao",
                 "cep",
                 "logradouro",
-                "municipio",
-                "uf",
+                "bairro",
+                "cidade",
+                "estado",
+                "numeroCasa",
+                "latitude",
+                "longitude",
+                "linkmap",
                 "atividades"
               ]
             }
@@ -1077,6 +1097,9 @@
                 "name": "main"
               }
             }
+          },
+          "400": {
+            "description": "Bad Request"
           },
           "401": {
             "description": "Unauthorized",
@@ -1116,6 +1139,75 @@
                 "mensagem": {
                   "type": "string",
                   "example": "Erro ao atualizar o local"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Local"
+        ],
+        "description": "Deleta um local pelo id do local",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "O Token está inválido ou expirado"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Local não encontrado"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "mensagem": {
+                  "type": "string",
+                  "example": "Erro ao excluir o local: "
                 }
               },
               "xml": {

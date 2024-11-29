@@ -1,54 +1,71 @@
+const padraoCEP = new RegExp(/^\d{8}$/);
+
 const Local = require("../models/Local");
 const Usuario = require("../models/Usuario");
 const Atividade = require("../models/Atividade");
+const LocalAtividade = require("../models/LocalAtividade");
 const {
   getLatitudeLongitude,
   getLinkGoogleMaps,
 } = require("../services/mapaService");
-const LocalAtividade = require("../models/LocalAtividade");
 const { Op } = require("sequelize");
+const e = require("express");
 
 class LocalController {
   async cadastrarLocal(request, response) {
     try {
       const dados = request.body;
 
-      if (!dados.nome) {
+      if (!dados.nome || !dados.cep || !dados.logradouro || !dados.bairro || !dados.cidade || !dados.estado) {
         return response
           .status(400)
-          .json({ mensagem: "O nome do local é obrigatório" });
+          .json({ mensagem: "Um o mains dados faltantes. O nome do local, cep, logradouro, bairro, cidade e estado são obrigatórios" });
       }
 
-      if (!dados.cep) {
-        return response.status(400).json({ mensagem: "O CEP é obrigatório" });
-      }
-
-      if (!dados.logradouro) {
+      if (!isNaN(dados.nome)) {
         return response
           .status(400)
-          .json({ mensagem: "O logradouro é obrigatório" });
+          .json({ mensagem: 'O nome do local não pode ser numérico.' })
       }
 
-      if (!dados.municipio) {
+      if (!padraoCEP.test(dados.cep)) {
         return response
           .status(400)
-          .json({ mensagem: "O municipio é obrigatório" });
+          .json({ mensagem: 'O CEP deve conter somente números e ter 8 dígitos.' });
       }
 
-      if (!dados.uf) {
-        return response.status(400).json({ mensagem: "O UF é obrigatório" });
+      if (dados.numeroCasa) {
+        if (isNaN(dados.numeroCasa)) {
+          return response
+            .status(400)
+            .json({ mensagem: 'O número da casa deve ser numérico.' });
+        }
       }
 
-      //validar latitude e longitude
+      let lat, lng;
 
-      const { lat, lng } = await getLatitudeLongitude(dados.cep);
+      if (!dados.latitude || !dados.longitude) {
+        ({ lat, lng } = await getLatitudeLongitude(dados.cep));
+      } else {
+        if (dados.latitude < -90 || dados.latitude > 90 || isNaN(dados.latitude)) {
+          return response
+            .status(400)
+            .json({ mensagem: 'A latitude deve estar entre -90 e 90 degraus' });
+        }
+        if (dados.longitude < -180 || dados.longitude > 180 || isNaN(dados.longitude)) {
+          return response
+            .status(400)
+            .json({ mensagem: 'A longitude deve estar entre -180 e 180 degraus' });
+        }
+        lat = dados.latitude;
+        lng = dados.longitude;
+      }
 
       const linkGoogleMaps = await getLinkGoogleMaps({ lat, lng });
 
       const local = await Local.create({
         ...dados,
         usuarioId: parseInt(request.usuarioId),
-        // usuarioId: parseInt(usuario.id),
         latitude: lat,
         longitude: lng,
         linkmap: linkGoogleMaps,
@@ -92,6 +109,27 @@ class LocalController {
       });
     }
   }
+  async listarLocaisPorUsuario(request, response) {
+    // Rota privada(com token)  path: /locais/usuario/:id
+    try {
+      const id = request.usuarioId;
+
+      const locais = await Local.findAll({
+        where: { usuarioId: id },
+        include: {
+          model: Atividade,
+          attributes: ["nomeAtividade"],
+          through: { attributes: [] },
+        },
+      });
+      return response.status(200).json(locais);
+    } catch (error) {
+      response.status(500).json({
+        mensagem: "Erro ao buscar os locais: ",
+        error,
+      });
+    }
+  }
   async listarPorId(request, response) {
     try {
       const { id } = request.params;
@@ -121,94 +159,17 @@ class LocalController {
       });
     }
   }
-  async listarLocaisPorUsuario(request, response) {
-    // Rota privada(com token)  path: /locais/usuario/:id
-    try {
-      const id = request.usuarioId;
-
-      if (!id) {
-        return response
-          .status(400)
-          .json({ mensagem: "O ID do usuario é obrigatório" });
-      }
-
-      const locais = await Local.findAll({
-        where: { usuarioId: id },
-        include: {
-          model: Atividade,
-          attributes: ["nomeAtividade"],
-          through: { attributes: [] },
-        },
-      });
-      return response.status(200).json(locais);
-    } catch (error) {
-      response.status(500).json({
-        mensagem: "Erro ao buscar os locais: ",
-        error,
-      });
-    }
-  }
-
-  async pegarUrlMapa(request, response) {
-    try {
-      const { id } = request.params;
-      const local = await Local.findOne({ where: { id } });
-
-      if (!local) {
-        return response.status(404).json({
-          message: "Local não encontrado",
-        });
-      }
-
-      if (local.linkmap === null || local.linkmap === undefined) {
-        return response.status(404).json({
-          message: "Local não possui link de mapas",
-        });
-      }
-
-      return response.status(200).json({ urlLocal: local.linkmap });
-    } catch (error) {
-      response.status(500).json({
-        mensagem: "Erro ao buscar o local: ",
-        error,
-      });
-    }
-  }
-
-  async deletarLocal(request, response) {
-    try {
-      const { id } = request.params;
-
-      const local = await Local.findOne({ where: { id } });
-
-      if (!local) {
-        return response.status(404).json({
-          message: "Local não encontrado",
-        });
-      }
-
-      await Local.destroy({ where: { id } });
-
-      return response.status(204).json({
-        message: "",
-      });
-    } catch (error) {
-      response.status(500).json({
-        mensagem: "Erro ao excluir o local: ",
-        error,
-      });
-    }
-  }
-
   async atualizarLocal(request, response) {
     try {
       const { id } = request.params;
       const dados = request.body;
 
+      //local matches with the user and local id
       const localAtualizar = await Local.findOne({
-        where: { id },
+        where: { id, usuarioId: request.usuarioId },
         include: {
           model: Atividade,
+          attributes: ["nomeAtividade"],
           through: { attributes: [] },
         },
       });
@@ -217,6 +178,56 @@ class LocalController {
         return response.status(404).json({
           message: "Local não encontrado",
         });
+      }
+
+      //Data validation
+      if (dados.nome) {
+        if (!isNaN(dados.nome)) {
+          return response
+            .status(400)
+            .json({ mensagem: 'O nome do local não pode ser numérico.' })
+        }
+      }
+
+      if (dados.cep) {
+        if (!padraoCEP.test(dados.cep)) {
+          return response
+            .status(400)
+            .json({ mensagem: 'O CEP deve conter somente números e ter 8 dígitos.' });
+        }
+      }
+
+      if (dados.numeroCasa) {
+        if (isNaN(dados.numeroCasa)) {
+          return response
+            .status(400)
+            .json({ mensagem: 'O número da casa deve ser numérico.' });
+        }
+      }
+
+      let lat = null;
+      let lng = null;
+      if (dados.latitude) {
+        if (dados.latitude < -90 || dados.latitude > 90 || isNaN(dados.latitude)) {
+          return response
+            .status(400)
+            .json({ mensagem: 'A latitude deve estar entre -90 e 90 degraus' });
+        }
+        lat = dados.latitude;
+      }
+
+      if (dados.longitude) {
+        if (dados.longitude < -180 || dados.longitude > 180 || isNaN(dados.longitude)) {
+          return response
+            .status(400)
+            .json({ mensagem: 'A longitude deve estar entre -180 e 180 degraus' });
+        }
+        lng = dados.longitude;
+      }
+
+      if (lat && lng) {
+        const link = await getLinkGoogleMaps({ lat, lng });
+        dados.linkmap = link;
       }
 
       await Local.update(dados, { where: { id } });
@@ -274,8 +285,64 @@ class LocalController {
         local,
       });
     } catch (error) {
+      console.log(error);
       response.status(500).json({
         mensagem: "Erro ao atualizar o local: ",
+        error,
+      })
+    }
+  }
+  async deletarLocal(request, response) {
+    try {
+      const { id } = request.params;
+      
+      //local matches with the user and local id
+      const local = await Local.findOne({ 
+        where: { id, usuarioId: request.usuarioId } });
+
+      if (!local) {
+        return response.status(404).json({
+          message: "Local não encontrado",
+        });
+      }
+
+      //deleting local activities
+      await LocalAtividade.destroy({ where: { localId: id } });
+
+      //deleting local
+      await Local.destroy({ where: { id } });
+
+      return response.status(204).json({
+        message: "",
+      });
+    } catch (error) {
+      response.status(500).json({
+        mensagem: "Erro ao excluir o local: ",
+        error,
+      });
+    }
+  }
+  async pegarUrlMapa(request, response) {
+    try {
+      const { id } = request.params;
+      const local = await Local.findOne({ where: { id } });
+
+      if (!local) {
+        return response.status(404).json({
+          message: "Local não encontrado",
+        });
+      }
+
+      if (local.linkmap === null || local.linkmap === undefined) {
+        return response.status(404).json({
+          message: "Local não possui link de mapas",
+        });
+      }
+
+      return response.status(200).json({ urlLocal: local.linkmap });
+    } catch (error) {
+      response.status(500).json({
+        mensagem: "Erro ao buscar o local: ",
         error,
       });
     }

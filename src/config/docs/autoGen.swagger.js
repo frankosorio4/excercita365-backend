@@ -13,8 +13,8 @@ const doc = {
         description: "API para gerenciamento de locais e atividades",
         version: "1.0.0",
     },
-    host: `${hostname}`,
-    schemes: ["https", "http"],
+    host: `${hostname}:${port}`,
+    schemes: ["http", "https"],
     security: [{ apiKeyAuth: [] }],
     securityDefinitions: {
         apiKeyAuth: {
@@ -27,3 +27,6 @@ const doc = {
 };
 
 swaggerAutogen(outputFile, endpointsFiles, doc);
+//to docker file
+// host: `${hostname}`,
+// schemes: ["https", "http"],
