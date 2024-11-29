@@ -99,11 +99,7 @@ Encontrar locais adequados para exercícios ao ar livre pode ser desafiador, esp
 
 ## Contribuições
 
-Contribuições são sempre bem-vindas! Por favor, leia o arquivo CONTRIBUTING.md para mais detalhes sobre como contribuir para o projeto.
-
-## Licença
-
-Distribuído sob a licença MIT. Veja LICENSE para mais informações.
+Contribuições são sempre bem-vindas!
 
 ## Autores
 
