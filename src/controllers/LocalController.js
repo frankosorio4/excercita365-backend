@@ -33,10 +33,12 @@ class LocalController {
           .json({ mensagem: 'O CEP deve conter somente números e ter 8 dígitos.' });
       }
 
-      if (isNaN(dados.numeroCasa)) {
-        return response
-          .status(400)
-          .json({ mensagem: 'O número da casa deve ser numérico.' });
+      if (dados.numeroCasa) {
+        if (isNaN(dados.numeroCasa)) {
+          return response
+            .status(400)
+            .json({ mensagem: 'O número da casa deve ser numérico.' });
+        }
       }
 
       let lat, lng;
@@ -106,6 +108,27 @@ class LocalController {
       });
     }
   }
+  async listarLocaisPorUsuario(request, response) {
+    // Rota privada(com token)  path: /locais/usuario/:id
+    try {
+      const id = request.usuarioId;
+
+      const locais = await Local.findAll({
+        where: { usuarioId: id },
+        include: {
+          model: Atividade,
+          attributes: ["nomeAtividade"],
+          through: { attributes: [] },
+        },
+      });
+      return response.status(200).json(locais);
+    } catch (error) {
+      response.status(500).json({
+        mensagem: "Erro ao buscar os locais: ",
+        error,
+      });
+    }
+  }
   async listarPorId(request, response) {
     try {
       const { id } = request.params;
@@ -131,33 +154,6 @@ class LocalController {
     } catch (error) {
       response.status(500).json({
         mensagem: "Erro ao buscar o local: ",
-        error,
-      });
-    }
-  }
-  async listarLocaisPorUsuario(request, response) {
-    // Rota privada(com token)  path: /locais/usuario/:id
-    try {
-      const id = request.usuarioId;
-
-      if (!id) {
-        return response
-          .status(400)
-          .json({ mensagem: "O ID do usuario é obrigatório" });
-      }
-
-      const locais = await Local.findAll({
-        where: { usuarioId: id },
-        include: {
-          model: Atividade,
-          attributes: ["nomeAtividade"],
-          through: { attributes: [] },
-        },
-      });
-      return response.status(200).json(locais);
-    } catch (error) {
-      response.status(500).json({
-        mensagem: "Erro ao buscar os locais: ",
         error,
       });
     }
@@ -213,7 +209,6 @@ class LocalController {
       });
     }
   }
-
   async atualizarLocal(request, response) {
     try {
       const { id } = request.params;

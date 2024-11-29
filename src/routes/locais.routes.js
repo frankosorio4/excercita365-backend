@@ -70,13 +70,13 @@ localRoutes.post("/",
     */
 );
 
-localRoutes.get("/usuario/:id",
+localRoutes.get("/usuario",
   LocalController.listarLocaisPorUsuario
   /* 
     #swagger.tags = ['Local']
-    #swagger.path = '/locais/usuario/{usuarioId}'
+    #swagger.path = '/locais/usuario'
     #swagger.method = 'get'
-    #swagger.description = 'Lista todos os locais do usuario logado)'
+    #swagger.description = 'Lista todos os locais do usuario logado'
     #swagger.responses[200] = {
         description: 'Retorna lista de locais pelo id do usuario'        
     }
@@ -85,13 +85,7 @@ localRoutes.get("/usuario/:id",
         schema: {
                 message: 'O Token está inválido ou expirado'
             } 
-    }          
-    #swagger.responses[400] = {
-        description: 'Not Found',
-        schema: {
-                message: 'O ID do usuario é obrigatório'
-            }
-    }   
+    }
     #swagger.responses[500] = {
         description: 'Internal Server Error',
         schema: {
@@ -109,7 +103,7 @@ localRoutes.get("/:id",
     #swagger.method = 'get'
     #swagger.description = 'Lista o local por id'
     #swagger.responses[200] = {
-        description: 'Retorna lista de locais pelo id'        
+        description: 'Retorna o local pelo id'        
     }
     #swagger.responses[401] = {
         description: 'Unauthorized',
