@@ -4,7 +4,8 @@ const loginController = require('../controllers/LoginController')
 
 const loginRoutes = Router()
 
-loginRoutes.post('/', loginController.login
+loginRoutes.post('/', 
+    loginController.login
     /* 
     #swagger.tags = ['Login']
     #swagger.path = '/login'
@@ -54,7 +55,8 @@ loginRoutes.post('/', loginController.login
     */
 )
 
-loginRoutes.put('/:id', loginController.atualizarStatusUsuario
+loginRoutes.put('/:id', 
+    loginController.atualizarStatusUsuario
     /* 
     #swagger.tags = ['Login']
     #swagger.path = '/login/{id}'
