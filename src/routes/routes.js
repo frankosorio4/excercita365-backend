@@ -10,6 +10,7 @@ const cadastrarRoutes = require('./cadastrar.routes');
 const usuariosRoutes = require('./usuarios.routes');
 const localRoutes = require('./locais.routes');
 const atividadeRoutes = require('./atividades.routes');
+const permissoesRoutes = require('./permissoes.routes');
 const validaToken = require('../middlewares/validaToken');
 
 // Rotas Públicas
@@ -22,5 +23,7 @@ routes.use('/cadastrar', cadastrarRoutes);
 routes.use('/usuarios',validaToken, usuariosRoutes);//add permission to access all the users
 routes.use('/locais', validaToken, localRoutes);
 routes.use('/atividades', validaToken, atividadeRoutes);
+
+routes.use('/permissoes',validaToken, permissoesRoutes);
 
 module.exports = routes;
