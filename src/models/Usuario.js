@@ -2,6 +2,8 @@ const { DataTypes } = require("sequelize");
 const connection = require("../database/connection");
 const {hashSync} = require('bcryptjs');
 const Local = require("./Local");
+const Permissao = require("./Permissao");
+const UsuarioPermissao = require("./UsuarioPermissao");
 
 const Usuario = connection.define('usuarios', {
     nome: {
@@ -50,6 +52,13 @@ const Usuario = connection.define('usuarios', {
 
 Local.belongsTo(Usuario, { onDelete: 'CASCADE' });
 Usuario.hasMany(Local, { onDelete: 'CASCADE' });
+
+//to relationate the table "permissoes" with the table "usuarios" and "permissoes_usuarios"
+Usuario.belongsToMany(Permissao, { 
+    through: UsuarioPermissao,
+    foreignKey: 'usuarioId',
+    otherKey: 'permissaoId'
+});
 
 Usuario.beforeSave((usuario) => {
     usuario.password = hashSync(usuario.password, 10)

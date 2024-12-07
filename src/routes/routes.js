@@ -11,7 +11,9 @@ const usuariosRoutes = require('./usuarios.routes');
 const localRoutes = require('./locais.routes');
 const atividadeRoutes = require('./atividades.routes');
 const permissoesRoutes = require('./permissoes.routes');
+const permissoesUsuarioRoutes = require('./permissoesUser.routes');
 const validaToken = require('../middlewares/validaToken');
+const verificarPermissao = require('../middlewares/verificarpermissao');
 
 // Rotas Públicas
 routes.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
@@ -20,10 +22,12 @@ routes.use('/login', loginRoutes);
 routes.use('/cadastrar', cadastrarRoutes);
 
 // Rotas Privadas
-routes.use('/usuarios',validaToken, usuariosRoutes);//add permission to access all the users
+routes.use('/usuarios',validaToken, usuariosRoutes);
 routes.use('/locais', validaToken, localRoutes);
 routes.use('/atividades', validaToken, atividadeRoutes);
 
 routes.use('/permissoes',validaToken, permissoesRoutes);
+
+routes.use('/usuarios-permissoes',validaToken, permissoesUsuarioRoutes);
 
 module.exports = routes;
