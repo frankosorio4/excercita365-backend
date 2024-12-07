@@ -22,12 +22,15 @@ routes.use('/login', loginRoutes);
 routes.use('/cadastrar', cadastrarRoutes);
 
 // Rotas Privadas
-routes.use('/usuarios',validaToken, usuariosRoutes);
+routes.use('/usuarios',validaToken,usuariosRoutes);
 routes.use('/locais', validaToken, localRoutes);
 routes.use('/atividades', validaToken, atividadeRoutes);
 
-routes.use('/permissoes',validaToken, permissoesRoutes);
+// Rotas com permissoes
+//To do create CRUD admin, modify get users from '/usuarios'
+//routes.use('/usuarios-Admin',validaToken, verificarPermissao(['admin']),usuariosListarRoutes);
 
-routes.use('/usuarios-permissoes',validaToken, permissoesUsuarioRoutes);
+routes.use('/permissoes',validaToken, verificarPermissao(['admin']), permissoesRoutes);
+routes.use('/usuarios-permissoes',validaToken, verificarPermissao(['admin']), permissoesUsuarioRoutes);
 
 module.exports = routes;
