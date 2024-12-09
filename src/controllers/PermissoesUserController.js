@@ -63,22 +63,6 @@ class PermissoesUsuarioController {
         try {
             const { usuarioId } = request.params
 
-            // const usuarioPermissoes = await UsuarioPermissao.findAll({
-            //     where: { usuarioId: usuarioId },
-            //     attributes: [
-            //         'usuarioId',
-            //         'permissaoId',
-            //         'createdAt',
-            //         'updatedAt'
-            //     ],
-            //     // include:[
-            //     //     {
-            //     //         model: Permissao,
-            //     //         attributes: ['descricao']
-            //     //     }
-            //     // ]
-            // })
-
             const usuario = await Usuario.findByPk(usuarioId, {
                 include: {
                     model: Permissao,
