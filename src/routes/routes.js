@@ -12,6 +12,7 @@ const localRoutes = require('./locais.routes');
 const atividadeRoutes = require('./atividades.routes');
 const permissoesRoutes = require('./permissoes.routes');
 const permissoesUsuarioRoutes = require('./permissoesUser.routes');
+const usuariosAdminRoutes = require('./usuariosAdmin.routes');
 const validaToken = require('../middlewares/validaToken');
 const verificarPermissao = require('../middlewares/verificarpermissao');
 
@@ -27,10 +28,8 @@ routes.use('/locais', validaToken, localRoutes);
 routes.use('/atividades', validaToken, atividadeRoutes);
 
 // Rotas com permissoes
-//To do create CRUD admin, modify get users from '/usuarios'
-//routes.use('/usuarios-Admin',validaToken, verificarPermissao(['admin']),usuariosListarRoutes);
-
 routes.use('/permissoes',validaToken, verificarPermissao(['admin']), permissoesRoutes);
 routes.use('/usuarios-permissoes',validaToken, verificarPermissao(['admin']), permissoesUsuarioRoutes);
+routes.use('/usuarios-admin',validaToken, verificarPermissao(['admin']),usuariosAdminRoutes);
 
 module.exports = routes;
