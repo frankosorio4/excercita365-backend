@@ -7,10 +7,10 @@ permissoesUsuarioRoutes = Router();
 permissoesUsuarioRoutes.post('/',
     PermissoesUsuarioController.atribuirPermissao
     /* 
-    #swagger.tags = ['Permissao_usuario']
+    #swagger.tags = ['Permissao_usuario-Admin']
     #swagger.path = '/usuarios-permissoes'
     #swagger.method = 'post'
-    #swagger.description = 'Desina uma permissao ao usuario pelo id do usuario e da permissao'
+    #swagger.description = 'Rota com permissoes de admin. Desina uma permissao ao usuario pelo id do usuario e da permissao'
     #swagger.parameters['obj'] = {
         in: 'body',
         description: 'Forneca o usuario_id e a permissao_id',
@@ -44,10 +44,10 @@ permissoesUsuarioRoutes.post('/',
 permissoesUsuarioRoutes.get('/',
     PermissoesUsuarioController.listarPermissoes
     /* 
-    #swagger.tags = ['Permissao_usuario']
+    #swagger.tags = ['Permissao_usuario-Admin']
     #swagger.path = '/usuarios-permissoes'
     #swagger.method = 'get'
-    #swagger.description = 'Retorna uma lista com todas as permissões de todos os usuários'
+    #swagger.description = 'Rota com permissoes de admin. Retorna uma lista com as permissões de todos os usuários.'
     #swagger.responses[200] = {
         schema: {
         "usuarioId": usuarioId,
@@ -67,10 +67,10 @@ permissoesUsuarioRoutes.get('/',
 permissoesUsuarioRoutes.get('/:usuarioId',
     PermissoesUsuarioController.listarPermissoesPorUsuario
     /* 
-    #swagger.tags = ['Permissao_usuario']
+    #swagger.tags = ['Permissao_usuario-Admin']
     #swagger.path = '/usuarios-permissoes/{usuario_id}'
     #swagger.method = 'get'
-    #swagger.description = 'Retorna uma lista com todas as permissões do usuário'
+    #swagger.description = 'Rota com permissoes de admin. Retorna uma lista com todas as permissões do usuário.'
     #swagger.responses[200] = {
         schema: {
         "usuarioId": usuarioId,
@@ -90,10 +90,10 @@ permissoesUsuarioRoutes.get('/:usuarioId',
 permissoesUsuarioRoutes.delete('/',
     PermissoesUsuarioController.removerPermissao
     /* 
-    #swagger.tags = ['Permissao_usuario']
+    #swagger.tags = ['Permissao_usuario-Admin']
     #swagger.path = '/usuarios-permissoes'
     #swagger.method = 'delete'
-    #swagger.description = 'Remove uma permissao ao usuario'
+    #swagger.description = 'Rota com permissoes de admin. Remove uma permissao ao usuario.'
     #swagger.parameters['obj'] = {
         in: 'body',
         description: 'Forneca o usuario_id e a permissao_id',

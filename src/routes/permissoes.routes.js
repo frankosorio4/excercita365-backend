@@ -7,10 +7,10 @@ permissoesRoutes = Router();
 permissoesRoutes.post('/', 
     PermissoesController.criar
     /* 
-    #swagger.tags = ['Permissao']
+    #swagger.tags = ['Permissao-Admin']
     #swagger.path = '/permissoes'
     #swagger.method = 'post'
-    #swagger.description = 'Cadastra uma nova permissao'
+    #swagger.description = 'Rota com permissoes de admin. Cadastra uma nova permissao.'
     #swagger.parameters['obj'] = {
         in: 'body',
         description: 'Nome descritivo da permissao sem espaco e com letras minusculas',
@@ -37,10 +37,10 @@ permissoesRoutes.post('/',
 permissoesRoutes.get('/', 
     PermissoesController.listarPermissoes
     /* 
-    #swagger.tags = ['Permissao']
+    #swagger.tags = ['Permissao-Admin']
     #swagger.path = '/permissoes'
     #swagger.method = 'get'
-    #swagger.description = 'End Point para listar todas as permissoes'
+    #swagger.description = 'Rota com permissoes de admin. End Point para listar todas as permissoes.'
     #swagger.responses[200] = {
         description: 'OK'        
     }
@@ -53,10 +53,10 @@ permissoesRoutes.get('/',
 permissoesRoutes.put('/:id',
     PermissoesController.atualizarPermissao
     /* 
-    #swagger.tags = ['Permissao']
+    #swagger.tags = ['Permissao-Admin']
     #swagger.path = '/permissoes/{id}'
     #swagger.method = 'put'
-    #swagger.description = 'Atualiza uma permissao pelo id da permissao'
+    #swagger.description = 'Rota com permissoes de admin. Atualiza uma permissao pelo id.'
     #swagger.parameters['obj'] = {
         in: 'body',
         description: 'Informa a descricao da permissao',
@@ -86,10 +86,10 @@ permissoesRoutes.put('/:id',
 permissoesRoutes.delete('/:id',
     PermissoesController.deletarPermissao
     /* 
-    #swagger.tags = ['Permissao']
+    #swagger.tags = ['Permissao-Admin']
     #swagger.path = '/permissoes/{id}'
     #swagger.method = 'delete'
-    #swagger.description = 'Deleta uma permissao pelo id da permissao'
+    #swagger.description = 'Rota com permissoes de admin. Deleta uma permissao pelo id.'
     #swagger.responses[204] = {
         description: 'No Content'        
     }

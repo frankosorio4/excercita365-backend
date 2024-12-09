@@ -1466,9 +1466,9 @@
     "/permissoes": {
       "post": {
         "tags": [
-          "Permissao"
+          "Permissao-Admin"
         ],
-        "description": "Cadastra uma nova permissao",
+        "description": "Rota com permissoes de admin. Cadastra uma nova permissao",
         "parameters": [
           {
             "name": "authorization",
@@ -1511,9 +1511,9 @@
       },
       "get": {
         "tags": [
-          "Permissao"
+          "Permissao-Admin"
         ],
-        "description": "End Point para listar todas as permissoes",
+        "description": "Rota com permissoes de admin. End Point para listar todas as permissoes",
         "parameters": [
           {
             "name": "authorization",
@@ -1537,9 +1537,9 @@
     "/permissoes/{id}": {
       "put": {
         "tags": [
-          "Permissao"
+          "Permissao-Admin"
         ],
-        "description": "Atualiza uma permissao pelo id da permissao",
+        "description": "Rota com permissoes de admin. Atualiza uma permissao pelo id da permissao",
         "parameters": [
           {
             "name": "id",
@@ -1591,9 +1591,9 @@
       },
       "delete": {
         "tags": [
-          "Permissao"
+          "Permissao-Admin"
         ],
-        "description": "Deleta uma permissao pelo id da permissao",
+        "description": "Rota com permissoes de admin. Deleta uma permissao pelo id da permissao",
         "parameters": [
           {
             "name": "id",
@@ -1626,9 +1626,9 @@
     "/usuarios-permissoes": {
       "post": {
         "tags": [
-          "Permissao_usuario"
+          "Permissao_usuario-Admin"
         ],
-        "description": "Desina uma permissao ao usuario pelo id do usuario e da permissao",
+        "description": "Rota com permissoes de admin. Desina uma permissao ao usuario pelo id do usuario e da permissao",
         "parameters": [
           {
             "name": "authorization",
@@ -1715,9 +1715,9 @@
       },
       "get": {
         "tags": [
-          "Permissao_usuario"
+          "Permissao_usuario-Admin"
         ],
-        "description": "Retorna uma lista com todas as permissões de todos os usuários",
+        "description": "Rota com permissoes de admin. Retorna uma lista com todas as permissões de todos os usuários",
         "parameters": [
           {
             "name": "authorization",
@@ -1739,9 +1739,9 @@
       },
       "delete": {
         "tags": [
-          "Permissao_usuario"
+          "Permissao_usuario-Admin"
         ],
-        "description": "Remove uma permissao ao usuario",
+        "description": "Rota com permissoes de admin. Remove uma permissao ao usuario",
         "parameters": [
           {
             "name": "authorization",
@@ -1830,9 +1830,9 @@
     "/usuarios-permissoes/{usuario_id}": {
       "get": {
         "tags": [
-          "Permissao_usuario"
+          "Permissao_usuario-Admin"
         ],
-        "description": "Retorna uma lista com todas as permissões do usuário",
+        "description": "Rota com permissoes de admin. Retorna uma lista com todas as permissões do usuário",
         "parameters": [
           {
             "name": "usuario_id",
