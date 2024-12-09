@@ -63,12 +63,12 @@ const usuariosRoutes = new Router();
 // );
 
 usuariosRoutes.get("/",
-    UsuarioController.listarUsuarios
+    UsuarioController.listarCamposUsuario
     /* 
     #swagger.tags = ['Usuário']
     #swagger.path = '/usuarios'
     #swagger.method = 'get'
-    #swagger.description = 'Lista todos os usuários.'
+    #swagger.description = 'Lista todos os campos do usuário que esta logado.'
     #swagger.responses[200] = {
         description: 'OK'        
     }
@@ -94,7 +94,7 @@ usuariosRoutes.get("/",
 );
 
 usuariosRoutes.put("/",
-    UsuarioController.atualizarUsuarios
+    UsuarioController.atualizarUsuario
     /* 
     #swagger.tags = ['Usuário']
     #swagger.path = '/usuarios'
@@ -140,7 +140,7 @@ usuariosRoutes.put("/",
 );
 
 usuariosRoutes.delete("/",
-    UsuarioController.deletarUsuarios
+    UsuarioController.deletarUsuario
     /* 
     #swagger.tags = ['Usuário']
     #swagger.path = '/usuarios'
@@ -175,6 +175,5 @@ usuariosRoutes.delete("/",
     }
     */
 );
-
 
 module.exports = usuariosRoutes;

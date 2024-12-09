@@ -7,26 +7,38 @@ const Local = require("../models/Local");
 
 class UsuarioController {
 
-    async listarUsuarios(request, response) {
+    async listarCamposUsuario(request, response) {
         try {
-            const usuarios = await Usuario.findAll({
-                attributes: [
-                    "id",
-                    "nome",
-                    "email",
-                    "createdAt",
-                    "isOnline"
-                ],
-                order: ["id"],
-            });
 
-            if (!usuarios) {
+            const userID =  request.usuarioId;// ID from valida token
+
+            const usuario = await Usuario.findByPk(userID);
+
+            if (!usuario) {
                 return response.status(404).json({
                     message: "Usuário não encontrado",
                 });
             }
 
-            return response.status(200).json(usuarios);
+            return response.status(200).json(
+                {
+                    id: usuario.id,
+                    nome: usuario.nome,
+                    sexo: usuario.sexo,
+                    email: usuario.email,
+                    dataNascimento: usuario.dataNascimento,
+                    cpf: usuario.cpf,
+                    cep: usuario.cep,
+                    logradouro: usuario.logradouro,
+                    bairro: usuario.bairro,
+                    cidade: usuario.cidade,
+                    estado: usuario.estado,
+                    complemento: usuario.complemento,
+                    numeroCasa: usuario.numeroCasa,
+                    CreatedAt: usuario.createdAt,
+                    UpdatedAt: usuario.updatedAt
+                }
+            );
         } catch (error) {
             response.status(500).json({
                 mensagem: "Erro ao buscar os usuários: ",
@@ -35,7 +47,7 @@ class UsuarioController {
         }
     }
 
-    async atualizarUsuarios(request, response) {
+    async atualizarUsuario(request, response) {
         try {
             const userID =  request.usuarioId;// ID from valida token
             const dados = request.body;
@@ -118,7 +130,7 @@ class UsuarioController {
         }
     }
 
-    async deletarUsuarios(request, response) {
+    async deletarUsuario(request, response) {
         try {
             const userID = request.usuarioId;// ID from valida token
             const usuario = await Usuario.findByPk(userID);
