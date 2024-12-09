@@ -47,7 +47,7 @@ permissoesUsuarioRoutes.get('/',
     #swagger.tags = ['Permissao_usuario']
     #swagger.path = '/usuarios-permissoes'
     #swagger.method = 'get'
-    #swagger.description = 'Retorna uma lista com todas as permissões do usuário'
+    #swagger.description = 'Retorna uma lista com todas as permissões de todos os usuários'
     #swagger.responses[200] = {
         schema: {
         "usuarioId": usuarioId,

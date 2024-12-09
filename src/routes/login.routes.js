@@ -61,7 +61,7 @@ loginRoutes.put('/:id',
     #swagger.tags = ['Login']
     #swagger.path = '/login/{id}'
     #swagger.method = 'put'
-    #swagger.description = 'Atualiza o status do usuario'
+    #swagger.description = 'Atualiza o status do usuario, para uso do front end.'
     #swagger.parameters['obj'] = {
         in: 'body',
         description: 'Informa o status do usuario',
