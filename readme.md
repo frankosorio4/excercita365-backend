@@ -103,7 +103,7 @@ Contribuições são sempre bem-vindas!
 
 ## Autores
 
-- [@TThaz](https://www.github.com/TThaz) - PO/DEV
-- [@douglascugliarisenai](https://www.github.com/douglascugliarisenai) - DEV
-- [@alanamandimifsc](https://www.github.com/alanamandimifsc) - DEV
-- [@frankosorio4](https://www.github.com/frankosorio4) - DEV
+- [@TThaz](https://www.github.com/TThaz)
+- [@douglascugliarisenai](https://www.github.com/douglascugliarisenai) 
+- [@alanamandimifsc](https://www.github.com/alanamandimifsc) 
+- [@frankosorio4](https://www.github.com/frankosorio4) 
