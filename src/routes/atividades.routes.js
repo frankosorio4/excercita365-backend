@@ -3,7 +3,8 @@ const AtividadeController = require('../controllers/AtividadeController')
 
 const atividadeRoutes = new Router()
 
-atividadeRoutes.post('/', AtividadeController.cadastrarAtividade
+atividadeRoutes.post('/', 
+    AtividadeController.cadastrarAtividade
     /* 
     #swagger.tags = ['Atividade']
     #swagger.path = '/atividades'
@@ -32,7 +33,9 @@ atividadeRoutes.post('/', AtividadeController.cadastrarAtividade
     }                
     */
 )
-atividadeRoutes.get('/', AtividadeController.listarAtividades,
+
+atividadeRoutes.get('/', 
+    AtividadeController.listarAtividades,
     /* 
     #swagger.tags = ['Atividade']
     #swagger.path = '/atividades'
@@ -52,7 +55,9 @@ atividadeRoutes.get('/', AtividadeController.listarAtividades,
     }                        
     */
 )
-atividadeRoutes.delete('/:id', AtividadeController.deletarAtividade,
+
+atividadeRoutes.delete('/:id', 
+    AtividadeController.deletarAtividade,
     /* 
     #swagger.tags = ['Atividade']
     #swagger.path = '/atividades/{id}'
@@ -72,7 +77,9 @@ atividadeRoutes.delete('/:id', AtividadeController.deletarAtividade,
     }
     */
 )
-atividadeRoutes.put('/:id', AtividadeController.atualizarAtividade,
+
+atividadeRoutes.put('/:id', 
+    AtividadeController.atualizarAtividade,
     /* 
     #swagger.tags = ['Atividade']
     #swagger.path = '/atividades/{id}'

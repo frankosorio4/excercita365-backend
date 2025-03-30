@@ -23,12 +23,10 @@ class AtividadeController {
                 .json({mensagem: 'Atividade criada com sucesso', atividade})
 
         } catch (error) {
-            response
-            .status(500)
-            .json({
-                mensagem: 'Erro ao cadastrar a atividade: ',
-                error
-            })
+            console.log(error);
+            response.status(500).json({
+                mensagem: 'Erro ao cadastrar a atividade: '
+            });
         }
     }
 
