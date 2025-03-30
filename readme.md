@@ -1,12 +1,12 @@
 # ExerciseOpenAir
 
-## Sobre o ExerciseOpenAir-Backend
+## About ExerciseOpenAir-Backend
 
-O _ExerciseOpenAir-Backend_ é uma api para cadastro de locais para exercícios ao ar livre. Ele permite que os usuários autorizados cadastrem locais.
+_ExerciseOpenAir-Backend_ is an API for registering exercise locals. It allows users to see all registered locals on the platform and register their contributions. This app was developed as a final project in the academy Senai, FMT.
 
-## Problema Resolvido
+## Problem solved
 
-Encontrar locais adequados para exercícios ao ar livre pode ser desafiador, especialmente em áreas urbanas. O ExerciseOpenAir resolve esse problema ao fornecer uma plataforma fácil de usar que lista locais para atividades físicas ao ar livre.
+Finding the appropriate locals to make execises could be challenging. ExerciseOpenAir solves this problem by providing a friendly platform that lists locals for physics activities.
 
 ## Tecnologias Utilizadas
 
@@ -78,11 +78,11 @@ Encontrar locais adequados para exercícios ao ar livre pode ser desafiador, esp
 
 1. Clone o repositório para sua máquina local.
 2. Ajuste as configurações do .env para o seu ambiente.
-3. Instale as dependências com: npm install.
+3. Instale as dependências com: ```npm install```.
 4. Execute o comando npm run start:db para criar o banco de dados e popular as tabelas.
-5. Gerar a documentação da API com: npm run swagger.
-6. Inicie o servidor com: npm run start:dev.
-7. Acesse http://localhost:3000/docs/ para visualizar a documentação em seu navegador.
+5. Gerar a documentação da API com: ```npm run swagger```.
+6. Inicie o servidor com: ```npm run start:dev```.
+7. Acesse [http://localhost:3000/docs/](http://localhost:3000/docs/) para visualizar a documentação em seu navegador.
 
 ##### OBS: Realizar os passos 1 a 5 apenas uma vez.
 
