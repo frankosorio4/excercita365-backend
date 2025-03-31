@@ -1,5 +1,4 @@
 const Permissao = require("../models/Permissao")
-const Usuario = require("../models/Usuario")
 
 class PermissoesController {
 

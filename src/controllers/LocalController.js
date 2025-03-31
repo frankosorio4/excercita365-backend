@@ -1,7 +1,6 @@
 const padraoCEP = new RegExp(/^\d{8}$/);
 
 const Local = require("../models/Local");
-const Usuario = require("../models/Usuario");
 const Atividade = require("../models/Atividade");
 const LocalAtividade = require("../models/LocalAtividade");
 const {
