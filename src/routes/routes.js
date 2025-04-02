@@ -4,7 +4,7 @@ const swaggerDocs = require('../config/docs/swagger');
 
 const routes = new Router();
 
-const dasboardRoutes = require('./dashboard.routes');
+const dashboardRoutes = require('./dashboard.routes');
 const loginRoutes = require('./login.routes');
 const cadastrarRoutes = require('./cadastrar.routes');
 const usuariosRoutes = require('./usuarios.routes');
@@ -18,7 +18,7 @@ const verificarPermissao = require('../middlewares/verificarpermissao');
 
 // Rotas Públicas
 routes.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
-routes.use('/dashboard', dasboardRoutes);
+routes.use('/dashboard', dashboardRoutes);
 routes.use('/login', loginRoutes);
 routes.use('/cadastrar', cadastrarRoutes);
 

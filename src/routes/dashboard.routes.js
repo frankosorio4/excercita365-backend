@@ -2,9 +2,9 @@ const {Router} = require('express')
 
 const dashboardController = require('../controllers/DashboardController')
 
-const dasboardRoutes = Router()
+const dashboardRoutes = Router()
 
-dasboardRoutes.get('/locais', dashboardController.listarLocais
+dashboardRoutes.get('/locais', dashboardController.listarLocais
     /* 
     #swagger.tags = ['dashboard']
     #swagger.path = '/dashboard/locais'
@@ -19,7 +19,7 @@ dasboardRoutes.get('/locais', dashboardController.listarLocais
     */
 )
 
-dasboardRoutes.get('/atividades', dashboardController.listarAtividades
+dashboardRoutes.get('/atividades', dashboardController.listarAtividades
     /* 
     #swagger.tags = ['dashboard']
     #swagger.path = '/dashboard/atividades'
@@ -37,4 +37,4 @@ dasboardRoutes.get('/atividades', dashboardController.listarAtividades
     */
 )
 
-module.exports = dasboardRoutes
+module.exports = dashboardRoutes
