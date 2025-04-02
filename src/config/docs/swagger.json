@@ -20,7 +20,7 @@
     }
   },
   "paths": {
-    "/dashboard": {
+    "/dashboard/locais": {
       "get": {
         "tags": [
           "dashboard"
@@ -32,6 +32,25 @@
           },
           "500": {
             "description": "Erro ao listar os locais"
+          }
+        }
+      }
+    },
+    "/dashboard/atividades": {
+      "get": {
+        "tags": [
+          "dashboard"
+        ],
+        "description": "End Point para lista todas as atividades fisicas sem estar logado.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Nenhuma atividade encontrada"
+          },
+          "500": {
+            "description": "Erro ao listar as atividades"
           }
         }
       }
@@ -1316,6 +1335,402 @@
         }
       }
     },
+    "/permissoes": {
+      "post": {
+        "tags": [
+          "Permissao-Admin"
+        ],
+        "description": "Rota com permissoes de admin. Cadastra uma nova permissao.",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Nome descritivo da permissao sem espaco e com letras minusculas",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "descricao": {
+                  "type": "string",
+                  "example": "Nome da permissao"
+                }
+              },
+              "required": [
+                "descricao"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Permissao criada com sucesso"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Permissao-Admin"
+        ],
+        "description": "Rota com permissoes de admin. End Point para listar todas as permissoes.",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Erro ao listar as permissoes"
+          }
+        }
+      }
+    },
+    "/permissoes/{id}": {
+      "put": {
+        "tags": [
+          "Permissao-Admin"
+        ],
+        "description": "Rota com permissoes de admin. Atualiza uma permissao pelo id.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Informa a descricao da permissao",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "descricao": {
+                  "type": "string",
+                  "example": "Nome da permissao modificado"
+                }
+              },
+              "required": [
+                "descricao"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Permissao atualizada com sucesso"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Permissao-Admin"
+        ],
+        "description": "Rota com permissoes de admin. Deleta uma permissao pelo id.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/usuarios-permissoes": {
+      "post": {
+        "tags": [
+          "Permissao_usuario-Admin"
+        ],
+        "description": "Rota com permissoes de admin. Desina uma permissao ao usuario pelo id do usuario e da permissao",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Forneca o usuario_id e a permissao_id",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "usuarioId": {
+                  "type": "string",
+                  "example": "Id_usuário"
+                },
+                "permissaoId": {
+                  "type": "string",
+                  "example": "Id_permissao"
+                }
+              },
+              "required": [
+                "usuarioId",
+                "permissaoId"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Usuário ou permissão nao encontrado"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Usuário ou permissão nao encontrado"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Erro ao desinar permissao ao usuário"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Permissao_usuario-Admin"
+        ],
+        "description": "Rota com permissoes de admin. Retorna uma lista com as permissões de todos os usuários.",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Permissao_usuario-Admin"
+        ],
+        "description": "Rota com permissoes de admin. Remove uma permissao ao usuario.",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Forneca o usuario_id e a permissao_id",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "usuarioId": {
+                  "type": "string",
+                  "example": "usuario_id"
+                },
+                "permissaoId": {
+                  "type": "string",
+                  "example": "permissao_id"
+                }
+              },
+              "required": [
+                "usuarioId",
+                "permissaoId"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Usuário ou permissão nao encontrado"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Usuário ou permissão nao encontrado"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Erro ao desinar permissao ao usuário"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/usuarios-permissoes/{usuario_id}": {
+      "get": {
+        "tags": [
+          "Permissao_usuario-Admin"
+        ],
+        "description": "Rota com permissoes de admin. Retorna uma lista com todas as permissões do usuário.",
+        "parameters": [
+          {
+            "name": "usuario_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/atividades": {
       "post": {
         "tags": [
@@ -1445,127 +1860,26 @@
             "name": "authorization",
             "in": "header",
             "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/permissoes": {
-      "post": {
-        "tags": [
-          "Permissao-Admin"
-        ],
-        "description": "Rota com permissoes de admin. Cadastra uma nova permissao",
-        "parameters": [
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
           },
           {
             "name": "obj",
             "in": "body",
-            "description": "Nome descritivo da permissao sem espaco e com letras minusculas",
+            "description": "Informa os dados da atividade",
             "required": true,
             "schema": {
               "type": "object",
               "properties": {
+                "nomeAtividade": {
+                  "type": "string",
+                  "example": "Nome da Atividade modificado"
+                },
                 "descricao": {
                   "type": "string",
-                  "example": "Nome da permissao"
+                  "example": "Descrição da Atividade modificado"
                 }
               },
               "required": [
-                "descricao"
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Permissao criada com sucesso"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "Permissao-Admin"
-        ],
-        "description": "Rota com permissoes de admin. End Point para listar todas as permissoes",
-        "parameters": [
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Erro ao listar as permissoes"
-          }
-        }
-      }
-    },
-    "/permissoes/{id}": {
-      "put": {
-        "tags": [
-          "Permissao-Admin"
-        ],
-        "description": "Rota com permissoes de admin. Atualiza uma permissao pelo id da permissao",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "obj",
-            "in": "body",
-            "description": "Informa a descricao da permissao",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "descricao": {
-                  "type": "string",
-                  "example": "Nome da permissao modificado"
-                }
-              },
-              "required": [
+                "nomeAtividade",
                 "descricao"
               ]
             }
@@ -1573,285 +1887,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Permissao atualizada com sucesso"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Permissao-Admin"
-        ],
-        "description": "Rota com permissoes de admin. Deleta uma permissao pelo id da permissao",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/usuarios-permissoes": {
-      "post": {
-        "tags": [
-          "Permissao_usuario-Admin"
-        ],
-        "description": "Rota com permissoes de admin. Desina uma permissao ao usuario pelo id do usuario e da permissao",
-        "parameters": [
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "obj",
-            "in": "body",
-            "description": "Forneca o usuario_id e a permissao_id",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "usuarioId": {
-                  "type": "string",
-                  "example": "Id_usuário"
-                },
-                "permissaoId": {
-                  "type": "string",
-                  "example": "Id_permissao"
-                }
-              },
-              "required": [
-                "usuarioId",
-                "permissaoId"
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "Usuário ou permissão nao encontrado"
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not Found",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "Usuário ou permissão nao encontrado"
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "Erro ao desinar permissao ao usuário"
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "Permissao_usuario-Admin"
-        ],
-        "description": "Rota com permissoes de admin. Retorna uma lista com todas as permissões de todos os usuários",
-        "parameters": [
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
             "description": "OK"
           },
           "401": {
             "description": "Unauthorized"
           },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Permissao_usuario-Admin"
-        ],
-        "description": "Rota com permissoes de admin. Remove uma permissao ao usuario",
-        "parameters": [
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "obj",
-            "in": "body",
-            "description": "Forneca o usuario_id e a permissao_id",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "usuarioId": {
-                  "type": "string",
-                  "example": "usuario_id"
-                },
-                "permissaoId": {
-                  "type": "string",
-                  "example": "permissao_id"
-                }
-              },
-              "required": [
-                "usuarioId",
-                "permissaoId"
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "400": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "Usuário ou permissão nao encontrado"
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            },
-            "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
           "404": {
-            "description": "Not Found",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "Usuário ou permissão nao encontrado"
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "Erro ao desinar permissao ao usuário"
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/usuarios-permissoes/{usuario_id}": {
-      "get": {
-        "tags": [
-          "Permissao_usuario-Admin"
-        ],
-        "description": "Rota com permissoes de admin. Retorna uma lista com todas as permissões do usuário",
-        "parameters": [
-          {
-            "name": "usuario_id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
+            "description": "Atividade não encontrada"
           },
           "500": {
             "description": "Internal Server Error"
