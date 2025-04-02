@@ -25,11 +25,11 @@ routes.use('/cadastrar', cadastrarRoutes);
 // Rotas Privadas
 routes.use('/usuarios', validaToken,usuariosRoutes);
 routes.use('/locais', validaToken, localRoutes);
-routes.use('/atividades', validaToken, atividadeRoutes);
 
 // Rotas com permissoes
 routes.use('/permissoes', validaToken, verificarPermissao(['admin']), permissoesRoutes);
 routes.use('/usuarios-permissoes', validaToken, verificarPermissao(['admin']), permissoesUsuarioRoutes);
+routes.use('/atividades', validaToken, verificarPermissao(['admin']),atividadeRoutes);
 routes.use('/usuarios-admin', validaToken, verificarPermissao(['admin']),usuariosAdminRoutes);
 
 module.exports = routes;

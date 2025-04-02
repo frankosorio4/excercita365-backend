@@ -36,6 +36,32 @@ class DashboardController {
       });
     }
   }
+
+  async listarAtividades(request, response) {
+    try {
+      const atividades = await Atividade.findAll()
+
+      if (!(atividades)) {
+        return response
+          .status(404)
+          .json({
+            message: 'Nenhuma atividade encontrada'
+          })
+      }
+
+      return response
+        .status(200)
+        .json(atividades)
+
+    } catch (error) {
+      response
+        .status(500)
+        .json({
+          mensagem: 'Erro ao listar as atividades: ',
+          error
+        })
+    }
+  }
 }
 
 module.exports = new DashboardController();
