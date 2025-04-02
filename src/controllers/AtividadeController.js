@@ -2,7 +2,12 @@ const Atividade = require('../models/Atividade')
 class AtividadeController {
     async cadastrarAtividade(request, response) {
         try {
-            const dados = request.body
+            const dadosRequest = request.body
+
+            const dados = {
+                nomeAtividade: dadosRequest.nomeAtividade.toLowerCase(),
+                descricao: dadosRequest.descricao
+            }
             
             if (!(dados.nomeAtividade)) {
                 return response
@@ -14,6 +19,15 @@ class AtividadeController {
                 return response
                     .status(400)
                     .json({ mensagem: 'A descrição da atividade é obrigatória' })
+            }
+
+            const atividadeExistente = await Atividade.findOne({ where: { nomeAtividade: dados.nomeAtividade } })
+            console.log(atividadeExistente)
+
+            if (atividadeExistente) {
+                return response
+                    .status(400)
+                    .json({ mensagem: 'Já existe uma atividade com esse nome' })
             }
 
             const atividade = await Atividade.create(dados)

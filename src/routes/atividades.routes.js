@@ -85,6 +85,15 @@ atividadeRoutes.put('/:id',
     #swagger.path = '/atividades/{id}'
     #swagger.method = 'put'
     #swagger.description = 'Atualiza uma atividade'
+    #swagger.parameters['obj'] = {
+        in: 'body',
+        description: 'Informa os dados da atividade',
+        required: true,
+        schema: { 
+            $nomeAtividade: 'Nome da Atividade modificado',
+            $descricao: 'Descrição da Atividade modificado',
+        }
+    }
     #swagger.responses[200] = {
         description: 'OK'        
     }
@@ -92,7 +101,7 @@ atividadeRoutes.put('/:id',
         description: 'Unauthorized'        
     }
     #swagger.responses[404] = {
-        description: 'Not Found'        
+        description: 'Atividade não encontrada'        
     }
     #swagger.responses[500] = {
         description: 'Internal Server Error'        
