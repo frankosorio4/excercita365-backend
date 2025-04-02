@@ -294,10 +294,11 @@ class LocalController {
   async deletarLocal(request, response) {
     try {
       const { id } = request.params;
-      
+
       //local matches with the user and local id
-      const local = await Local.findOne({ 
-        where: { id, usuarioId: request.usuarioId } });
+      const local = await Local.findOne({
+        where: { id, usuarioId: request.usuarioId }
+      });
 
       if (!local) {
         return response.status(404).json({
