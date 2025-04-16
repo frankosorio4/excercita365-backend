@@ -5,7 +5,7 @@ const connection = require("./database/connection");
 const APP_PORT = process.env.APP_PORT_LOCAL;
 
 class Server {
-    
+    // a comment to test git hub actions
     constructor(server = express()) {
         this.middlewares(server);
         this.database();
