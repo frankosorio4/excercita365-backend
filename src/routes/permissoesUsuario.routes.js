@@ -1,6 +1,6 @@
 const { Router } = require('express');
 
-const PermissoesUsuarioController = require('../controllers/PermissoesUserController');
+const PermissoesUsuarioController = require('../controllers/PermissoesUsuarioController');
 
 permissoesUsuarioRoutes = Router();
 
@@ -49,11 +49,12 @@ permissoesUsuarioRoutes.get('/',
     #swagger.method = 'get'
     #swagger.description = 'Rota com permissoes de admin. Retorna uma lista com as permissões de todos os usuários.'
     #swagger.responses[200] = {
+        description: 'OK',
         schema: {
-        "usuarioId": usuarioId,
-        "permissaoId": permissaoId,
-        "createdAt": "data de criacao da permissão",
-        "updatedAt": "data de atualizacao da permissão"
+        usuarioId: "usuarioId",
+        permissaoId: "permissaoId",
+        createdAt: "data de criacao da permissão",
+        updatedAt: "data de atualizacao da permissão"
         }
     }
     #swagger.responses[500] = {
