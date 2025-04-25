@@ -28,8 +28,8 @@ routes.use('/locais', validaToken, localRoutes);
 
 // Rotas com permissoes
 routes.use('/permissoes', validaToken, verificarPermissao(['admin']), permissoesRoutes);
-//routes.use('/usuarios-permissoes', validaToken, verificarPermissao(['admin']), permissoesUsuarioRoutes);
-//routes.use('/atividades', validaToken, verificarPermissao(['admin']),atividadeRoutes);
-//routes.use('/usuarios-admin', validaToken, verificarPermissao(['admin']),usuariosAdminRoutes);
+routes.use('/usuarios-permissoes', validaToken, verificarPermissao(['admin']), permissoesUsuarioRoutes);
+routes.use('/atividades', validaToken, verificarPermissao(['admin']),atividadeRoutes);
+routes.use('/usuarios-admin', validaToken, verificarPermissao(['admin']),usuariosAdminRoutes);
 
 module.exports = routes;
