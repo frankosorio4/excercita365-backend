@@ -5,11 +5,11 @@
     "description": "API para gerenciamento de locais e atividades",
     "version": "1.0.0"
   },
-  "host": "localhost:3000",
+  "host": "localhost",
   "basePath": "/",
   "schemes": [
-    "http",
-    "https"
+    "https",
+    "http"
   ],
   "securityDefinitions": {
     "apiKeyAuth": {
