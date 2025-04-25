@@ -1,7 +1,7 @@
 const Permissao = require("../models/Permissao");
 const Usuario = require("../models/Usuario");
 
-const verificarPermissao = (permissoesRequeridas)  => {
+const verificaPermissao = (permissoesRequeridas)  => {
     return async (request, response, next) => {
         try{
             const { usuarioId } = request
@@ -33,4 +33,4 @@ const verificarPermissao = (permissoesRequeridas)  => {
     }
 }
 
-module.exports = verificarPermissao
+module.exports = verificaPermissao

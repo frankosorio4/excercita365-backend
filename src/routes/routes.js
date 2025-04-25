@@ -14,7 +14,7 @@ const permissoesRoutes = require('./permissoes.routes');
 const permissoesUsuarioRoutes = require('./permissoesUsuario.routes');
 const usuariosAdminRoutes = require('./usuariosAdmin.routes');
 const validaToken = require('../middlewares/validaToken');
-const verificarPermissao = require('../middlewares/verificarPermissao');
+const verificaPermissao = require('../middlewares/verificaPermissao');
 
 // Rotas Públicas
 routes.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
@@ -27,9 +27,9 @@ routes.use('/usuarios', validaToken,usuariosRoutes);
 routes.use('/locais', validaToken, localRoutes);
 
 // Rotas com permissoes
-routes.use('/permissoes', validaToken, verificarPermissao(['admin']), permissoesRoutes);
-routes.use('/usuarios-permissoes', validaToken, verificarPermissao(['admin']), permissoesUsuarioRoutes);
-routes.use('/atividades', validaToken, verificarPermissao(['admin']),atividadeRoutes);
-routes.use('/usuarios-admin', validaToken, verificarPermissao(['admin']),usuariosAdminRoutes);
+routes.use('/permissoes', validaToken, verificaPermissao(['admin']), permissoesRoutes);
+routes.use('/usuarios-permissoes', validaToken, verificaPermissao(['admin']), permissoesUsuarioRoutes);
+routes.use('/atividades', validaToken, verificaPermissao(['admin']),atividadeRoutes);
+routes.use('/usuarios-admin', validaToken, verificaPermissao(['admin']),usuariosAdminRoutes);
 
 module.exports = routes;
