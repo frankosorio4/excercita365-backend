@@ -51,10 +51,10 @@ permissoesUsuarioRoutes.get('/',
     #swagger.responses[200] = {
         description: 'OK',
         schema: {
-        usuarioId: "usuarioId",
-        permissaoId: "permissaoId",
-        createdAt: "data de criacao da permissão",
-        updatedAt: "data de atualizacao da permissão"
+        "usuarioId": "usuarioId",
+        "permissaoId": "permissaoId",
+        "createdAt": "data de criacao da permissão",
+        "updatedAt": "data de atualizacao da permissão"
         }
     }
     #swagger.responses[500] = {
@@ -74,8 +74,8 @@ permissoesUsuarioRoutes.get('/:usuarioId',
     #swagger.description = 'Rota com permissoes de admin. Retorna uma lista com todas as permissões do usuário.'
     #swagger.responses[200] = {
         schema: {
-        "usuarioId": usuarioId,
-        "permissaoId": permissaoId,
+        "usuarioId": "usuarioId",
+        "permissaoId": "permissaoId",
         "createdAt": "data de criacao da permissão",
         "updatedAt": "data de atualizacao da permissão"
         }

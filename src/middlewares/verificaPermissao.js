@@ -1,11 +1,11 @@
 const Permissao = require("../models/Permissao");
 const Usuario = require("../models/Usuario");
 
-const verificaPermissao = (permissoesRequeridas)  => {
+const verificaPermissao = (permissoesRequeridas) => {
     return async (request, response, next) => {
-        try{
+        try {
             const { usuarioId } = request
-            
+
             // Get all the information of the user inckluding the permissions
             const usuario = await Usuario.findByPk(usuarioId, {
                 include: {
@@ -21,14 +21,17 @@ const verificaPermissao = (permissoesRequeridas)  => {
 
             const temPermissao = permissoesRequeridas.every(permissao => permissoesUsuario.includes(permissao))
 
-            if(!temPermissao) {
+            if (!temPermissao) {
                 return response.status(401).json({ mensagem: 'Usuário não tem uma ou mais permissões' })
             }
-            
+
             next();
         } catch (error) {
             console.log(error)
-            response.status(500).json({ mensagem: 'A requisição falhou' })
+            response.status(500).json({
+                mensagem: 'A requisição falhou',
+                erro: error.message
+            })
         }
     }
 }
