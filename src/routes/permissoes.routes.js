@@ -2,7 +2,7 @@ const {Router} = require('express');
 
 const PermissoesController = require('../controllers/PermissoesController');
 
-permissoesRoutes = Router();
+const permissoesRoutes = Router();
 
 permissoesRoutes.post('/', 
     PermissoesController.criar
@@ -15,9 +15,8 @@ permissoesRoutes.post('/',
         in: 'body',
         description: 'Nome descritivo da permissao sem espaco e com letras minusculas',
         required: true,
-        schema: { 
-            $descricao: 'Nome da permissao',
-        }
+        schema: { $descricao: 'Nome da permissao' }
+
     }
     #swagger.responses[201] = {
         description: 'Permissao criada com sucesso'
@@ -57,7 +56,7 @@ permissoesRoutes.put('/:id',
         description: 'Informa a descricao da permissao',
         required: true,
         schema: { 
-            $descricao: 'Nome da permissao modificado',
+            $descricao: 'Nome da permissao modificado'
         }
     }
     #swagger.responses[200] = {
