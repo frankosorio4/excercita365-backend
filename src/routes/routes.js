@@ -14,7 +14,7 @@ const permissoesRoutes = require('./permissoes.routes');
 const permissoesUsuarioRoutes = require('./permissoesUser.routes');
 const usuariosAdminRoutes = require('./usuariosAdmin.routes');
 const validaToken = require('../middlewares/validaToken');
-const verificarPermissao = require('../middlewares/verificarpermissao');
+const verificarPermissao = require('../middlewares/verificarPermissao');
 
 // Rotas Públicas
 routes.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
