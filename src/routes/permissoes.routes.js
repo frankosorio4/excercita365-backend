@@ -36,18 +36,13 @@ permissoesRoutes.post('/',
 
 permissoesRoutes.get('/', 
     PermissoesController.listarPermissoes
-    /* 
-    #swagger.tags = ['Permissao-Admin']
-    #swagger.path = '/permissoes'
-    #swagger.method = 'get'
-    #swagger.description = 'Rota com permissoes de admin. End Point para listar todas as permissoes.'
-    #swagger.responses[200] = {
-        description: 'OK'        
-    }
-    #swagger.responses[500] = {
-        description: 'Erro ao listar as permissoes'        
-    }
-    */
+    /*  #swagger.tags = ['Permissao-Admin']
+      #swagger.path = '/permissoes'
+      #swagger.method = 'get'
+      #swagger.description = 'Rota com permissoes de admin...'
+      #swagger.responses[200] = { description: 'OK', schema: { usuarioId: 1, permissaoId: 2, createdAt: '', updatedAt: '' } }
+      #swagger.responses[500] = { description: 'Erro ao listar as permissoes' }
+  */
 );
 
 permissoesRoutes.put('/:id',
