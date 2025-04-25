@@ -13,10 +13,10 @@ const doc = {
         description: "API para gerenciamento de locais e atividades",
         version: "1.0.0",
     },
-    host: `${hostname}`,
-    //host: `${hostname}:${port}`, use this line for docker or local development, port 3000
-    schemes: ["https", "http"],
-    //schemes: ["http", "https"],// use this line for docker or local development
+    //host: `${hostname}`,
+    host: `${hostname}:${port}`,// use this line for docker or local development, port 3000
+    //schemes: ["https", "http"],
+    schemes: ["http", "https"],// use this line for docker or local development
     security: [{ apiKeyAuth: [] }],
     securityDefinitions: {
         apiKeyAuth: {

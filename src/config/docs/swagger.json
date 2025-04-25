@@ -5,11 +5,11 @@
     "description": "API para gerenciamento de locais e atividades",
     "version": "1.0.0"
   },
-  "host": "localhost",
+  "host": "localhost:3000",
   "basePath": "/",
   "schemes": [
-    "https",
-    "http"
+    "http",
+    "https"
   ],
   "securityDefinitions": {
     "apiKeyAuth": {
@@ -1385,7 +1385,7 @@
         "tags": [
           "Permissao-Admin"
         ],
-        "description": "Rota com permissoes de admin. End Point para listar todas as permissoes.",
+        "description": "Rota com permissoes de admin...",
         "parameters": [
           {
             "name": "authorization",
@@ -1395,7 +1395,31 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "usuarioId": {
+                  "type": "number",
+                  "example": 1
+                },
+                "permissaoId": {
+                  "type": "number",
+                  "example": 2
+                },
+                "createdAt": {
+                  "type": "string",
+                  "example": ""
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "example": ""
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -1599,13 +1623,49 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "usuarioId": {
+                  "type": "string",
+                  "example": "usuarioId"
+                },
+                "permissaoId": {
+                  "type": "string",
+                  "example": "permissaoId"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "example": "data de criacao da permissão"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "example": "data de atualizacao da permissão"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Erro ao listar permissões do usuário"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           }
         }
       },
