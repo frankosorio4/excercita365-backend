@@ -1,4 +1,4 @@
-FROM node:23-slim
+FROM node:18-slim
 
 # Defina as variáveis de build
 ARG APP_PORT_LOCAL
