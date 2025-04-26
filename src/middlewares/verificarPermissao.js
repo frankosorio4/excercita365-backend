@@ -1,5 +1,6 @@
 const Permissao = require("../models/Permissao");
 const Usuario = require("../models/Usuario");
+const UsuarioPermissao = require("../models/UsuarioPermissao");
 
 const verificarPermissao = (permissoesRequeridas)  => {
     return async (request, response, next) => {
@@ -11,13 +12,16 @@ const verificarPermissao = (permissoesRequeridas)  => {
                 include: {
                     model: Permissao,
                     through: {
+                        model: UsuarioPermissao,
                         attributes: []
                     }
                 }
             });
-
+            
             // get an ARRAY with the permissions of the user from usuario.permissoes
             const permissoesUsuario = usuario.permissoes.map(p => p.descricao)
+            
+            //console.log("Mensagem do middleware: ", permissoesUsuario)
 
             const temPermissao = permissoesRequeridas.every(permissao => permissoesUsuario.includes(permissao))
 
@@ -28,7 +32,10 @@ const verificarPermissao = (permissoesRequeridas)  => {
             next();
         } catch (error) {
             console.log(error)
-            response.status(500).json({ mensagem: 'A requisição falhou' })
+            response.status(500).json({
+                mensagem: 'A requisição falhou',
+                erro: error.message
+            })
         }
     }
 }
