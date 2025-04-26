@@ -1,5 +1,6 @@
 const Permissao = require("../models/Permissao");
 const Usuario = require("../models/Usuario");
+const UsuarioPermissao = require("../models/UsuarioPermissao");
 
 const verificaPermissao = (permissoesRequeridas) => {
     return async (request, response, next) => {
@@ -11,6 +12,7 @@ const verificaPermissao = (permissoesRequeridas) => {
                 include: {
                     model: Permissao,
                     through: {
+                        model: UsuarioPermissao,
                         attributes: []
                     }
                 }
