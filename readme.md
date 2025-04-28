@@ -2,7 +2,7 @@
 
 ## About Exercita365
 
-_Exerrcita365_ is an API for registering exercise locations. It allows users to see all registered locals on the platform and register their contributions. This app was developed as a final project in the academy Senai, FMT.
+_Exercita365_ is an API for registering exercise locations. It allows users to see all registered locals on the platform and register their contributions. This app was developed as a final project in the academy Senai, FMT.
 
 ## Problem solved
 
@@ -16,10 +16,34 @@ Finding the appropriate locations to make exercises could be challenging. Exerci
 - _Swagger:_ To do the documentation and test the API.
 - _Docker:_ To create the needed containers.
 
+## Pré-requisits
 
+- NodeJS
+- PostgreSQL
+
+## Steps to execute
+
+1. Clone the repository.
+2. Adjust the environment variables in the .en file.
+3. Install the necessary libraries using the command ```npm install```.
+4. Execute the command ```npm run start:db``` to create the database, run the seeders and migrations.
+5. Generate the swagger documentation with the command ```npm run swagger```.
+6. Star the server with ```npm run start:dev```.
+7. Acess to [http://localhost:3000/docs/](http://localhost:3000/docs/) to visualize the swagger documentation in the browser.
+
+##### Perform steps 1 to 5 only the first time you run the project.
+
+# Steps to create an image Docker with Docker Desktop and run it (docker-compose.yml)
+
+1. Open Docker Desktop.
+2. Open the terminal in the root repository. It could be the VS Code terminal.
+3. Run ```docker-compose build``` to build the image using the Docker Compose file.
+4. Run ```docker-compose up -d --build``` to construct the container and install the containers inside the project.
+   
 ## Modelo de Dados
+![Modelo de Dados](https://github.com/user-attachments/assets/94af581b-e0d3-4c62-af17-74a96a5c1981)
 
-![Modelo de Dados](./src/assets/modelo-de-dados.png)
+<!-- ![Modelo de Dados](./src/assets/modelo-de-dados.png created in https://drawsql.app/ -->
 
 ## Project structure
 
@@ -96,30 +120,6 @@ package-lock.json
 package.json
 readme.md
 ```
-
-## Pré-requisits
-
-- NodeJS
-- PostgreSQL
-
-## Steps to execute
-
-1. Clone the repository.
-2. Adjust the environment variables in the .en file.
-3. Install the necessary libraries using the command ```npm install```.
-4. Execute the command ```npm run start:db``` to create the database, run the seeders and migrations.
-5. Generate the swagger documentation with the command ```npm run swagger```.
-6. Star the server with ```npm run start:dev```.
-7. Acess to [http://localhost:3000/docs/](http://localhost:3000/docs/) to visualize the swagger documentation in the browser.
-
-##### Perform steps 1 to 5 only the first time you run the project.
-
-# Steps to create an image Docker with Docker Desktop and run it (docker-compose.yml)
-
-1. Open Docker Desktop.
-2. Open the terminal in the root repository. It could be the VS Code terminal.
-3. Run ```docker-compose build``` to build the image using the Docker Compose file.
-4. Run ```docker-compose up -d --build``` to construct the container and install the containers inside the project.
 
 ## Improvements
 
