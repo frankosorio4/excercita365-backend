@@ -12,6 +12,7 @@ Finding the appropriate locations to make exercises could be challenging. Exerci
 
 - _[NodeJS](https://nodejs.org/en)_
 - _[Express](https://expressjs.com/)_
+- _[Sequelize](https://www.npmjs.com/package/sequelize)_
 - _[Axios](https://www.npmjs.com/package/axios)_
 - _[Bcryptjs](https://www.npmjs.com/package/bcryptjs)_
 - _[Swagger](https://swagger.io/docs/open-source-tools/swagger-ui/development/setting-up/?sbsearch=node)_
