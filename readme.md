@@ -1,27 +1,27 @@
-# ExerciseOpenAir
+# Exercita365
 
-## About ExerciseOpenAir-Backend
+## About Exercita365
 
-_ExerciseOpenAir-Backend_ is an API for registering exercise locals. It allows users to see all registered locals on the platform and register their contributions. This app was developed as a final project in the academy Senai, FMT.
+_Exerrcita365_ is an API for registering exercise locations. It allows users to see all registered locals on the platform and register their contributions. This app was developed as a final project in the academy Senai, FMT.
 
 ## Problem solved
 
-Finding the appropriate locals to make execises could be challenging. ExerciseOpenAir solves this problem by providing a friendly platform that lists locals for physics activities.
+Finding the appropriate locations to make exercises could be challenging. ExerciseOpenAir solves this problem by providing a friendly platform that lists locals for physical activities.
 
 ## Tecnologias Utilizadas
 
 - _Back-end:_ NodeJS e Express
-- _APIs:_ ViaCep e Awesomeapi para consultas de Cep e localização.
-- _Banco de Dados:_ PostgreSQL
-- _Swagger:_ para documentação da API
-- _Docker:_ para containers
+- _APIs:_ ViaCep and Awesomeapi to consult CEP and locations.
+- _Database:_ PostgreSQL
+- _Swagger:_ To do the documentation and test the API.
+- _Docker:_ To create the needed containers.
 
 
 ## Modelo de Dados
 
 ![Modelo de Dados](./src/assets/modelo-de-dados.png)
 
-## Estrutura do Projeto
+## Project structure
 
 ```
 ├── src 
@@ -66,30 +66,29 @@ Finding the appropriate locals to make execises could be challenging. ExerciseOp
 
 ```
 
-
-## Como Executar
-
-## Pré-requisitos
+## Pré-requisits
 
 - NodeJS
 - PostgreSQL
 
-## Passos para Executar
+## Steps to execute
 
-1. Clone o repositório para sua máquina local.
-2. Ajuste as configurações do .env para o seu ambiente.
-3. Instale as dependências com: ```npm install```.
-4. Execute o comando npm run start:db para criar o banco de dados e popular as tabelas.
-5. Gerar a documentação da API com: ```npm run swagger```.
-6. Inicie o servidor com: ```npm run start:dev```.
-7. Acesse [http://localhost:3000/docs/](http://localhost:3000/docs/) para visualizar a documentação em seu navegador.
+1. Clone the repository.
+2. Adjust the environment variables in the .en file.
+3. Install the necessary libraries using the command ```npm install```.
+4. Execute the command ```npm run start:db``` to create the database, run the seeders and migrations.
+5. Generate the swagger documentation with the command ```npm run swagger```.
+6. Star the server with ```npm run start:dev```.
+7. Acess to [http://localhost:3000/docs/](http://localhost:3000/docs/) to visualize the swagger documentation in the browser.
 
-##### OBS: Realizar os passos 1 a 5 apenas uma vez.
+##### Perform steps 1 to 5 only the first time you run the project.
 
-# Passos para Desenvolver 
+# Steps to create an image Docker with Docker Desktop and run it (docker-compose.yml)
 
-1. Abrir o terminal no diretório do projeto
-2. Digite: docker-compose up -d --build
+1. Open Docker Desktop.
+2. Open the terminal in the root repository. It could be the VS Code terminal.
+3. Run ```docker-compose build``` to build the image using the Docker Compose file.
+4. Run ```docker-compose up -d --build``` to constructs the container and installs the containers inside the project.
 
 ## Melhorias Futuras
 
