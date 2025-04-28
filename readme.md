@@ -34,7 +34,7 @@ Finding the appropriate locations to make exercises could be challenging. Exerci
 6. Star the server with ```npm run start:dev```.
 7. Acess to [http://localhost:3000/docs/](http://localhost:3000/docs/) to visualize the swagger documentation in the browser.
 
-##### Perform steps 1 to 5 only the first time you run the project.
+##### Perform steps 1 to 5 only once you run the project.
 
 # Steps to create an image Docker with Docker Desktop and run it (docker-compose.yml)
 
@@ -43,7 +43,7 @@ Finding the appropriate locations to make exercises could be challenging. Exerci
 3. Run ```docker-compose build``` to build the image using the Docker Compose file.
 4. Run ```docker-compose up -d --build``` to construct the container and install the containers inside the project.
    
-## Modelo de Dados
+## Database Model
 ![image](https://github.com/user-attachments/assets/b1f658d2-0752-4398-9a5a-0dae03f76f5f)
 
 <!-- ![Modelo de Dados](./src/assets/modelo-de-dados.png created in https://drawsql.app/ -->
