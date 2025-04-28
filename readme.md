@@ -2,7 +2,7 @@
 
 ## About Exercita365
 
-_Exercita365_ is an API for registering exercise locations. It allows users to see all registered locals on the platform and register their contributions. This app was developed as a final project in the academy Senai, FMT.
+_Exercita365_ is an API for registering exercise locations. It allows users to see all registered locals on the platform and register their contributions. This app was developed as a final project in the academy SENAI, FMT.
 
 ## Problem solved
 
@@ -44,7 +44,7 @@ Finding the appropriate locations to make exercises could be challenging. Exerci
 4. Run ```docker-compose up -d --build``` to construct the container and install the containers inside the project.
    
 ## Modelo de Dados
-![Modelo de Dados](https://github.com/user-attachments/assets/94af581b-e0d3-4c62-af17-74a96a5c1981)
+![image](https://github.com/user-attachments/assets/b1f658d2-0752-4398-9a5a-0dae03f76f5f)
 
 <!-- ![Modelo de Dados](./src/assets/modelo-de-dados.png created in https://drawsql.app/ -->
 
@@ -126,13 +126,13 @@ readme.md
 
 ## Improvements
 
-- _Front-end Integrations_.
-- _Improve the project organization and divide the responsibilities.
+- Front-end Integration.
+- Improve the project organization and divide the responsibilities.
 - _Tests:_ Include unitary and integration tests.
 
 ## Contribuitions
 
-Contributions and suggestions are welcome. (frankosorio4@gmail.com)
+Contribution and suggestions are welcome. (frankosorio4@gmail.com)
 
 ## Autors
 
