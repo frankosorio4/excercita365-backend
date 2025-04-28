@@ -8,14 +8,17 @@ _Exercita365_ is an API for registering exercise locations. It allows users to s
 
 Finding the appropriate locations to make exercises could be challenging. ExerciseOpenAir solves this problem by providing a friendly platform that lists locals for physical activities.
 
-## Tecnologies
+## Tecnologies and libraries
 
-- _Back-end:_ NodeJS e Express
-- _APIs:_ ViaCep and Awesomeapi to consult CEP and locations.
-- _Database:_ PostgreSQL
-- _Swagger:_ To do the documentation and test the API.
-- _Docker:_ To create the needed containers.
-
+- _[NodeJS](https://nodejs.org/en)_
+- _[Express](https://expressjs.com/)_
+- _[Axios](https://www.npmjs.com/package/axios)_
+- _[Bcryptjs](https://www.npmjs.com/package/bcryptjs)_
+- _[Swagger](https://swagger.io/docs/open-source-tools/swagger-ui/development/setting-up/?sbsearch=node)_
+- _[PostgreSQL](https://www.postgresql.org/)_
+- _[Docker](https://www.docker.com/)_
+- _APIs:_ [ViaCep](https://viacep.com.br/) and [Awesomeapi](https://docs.awesomeapi.com.br/api-cep) to consult CEPs.
+  
 ## Pré-requisits
 
 - NodeJS
