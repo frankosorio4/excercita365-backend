@@ -28,11 +28,24 @@ Finding the appropriate locations to make exercises could be challenging. Exerci
 
 1. Clone the repository.
 2. Adjust the environment variables in the .en file.
-3. Install the necessary libraries using the command ```npm install```.
-4. Execute the command ```npm run start:db``` to create the database, run the seeders and migrations.
-5. Generate the swagger documentation with the command ```npm run swagger```.
-6. Star the server with ```npm run start:dev```.
-7. Acess to [http://localhost:3000/docs/](http://localhost:3000/docs/) to visualize the swagger documentation in the browser.
+3. Install the necessary libraries using the command
+   ```bash
+   npm install
+   ```
+5. Execute the command
+   ```bash
+   npm run start:db
+   ```
+   to create the database and run the seeders and migrations.
+7. Generate the swagger documentation with the command
+   ```bash
+   npm run swagger
+   ```
+9. Star the server with
+    ```bash
+   npm run start:dev
+    ```
+11. Acess to [http://localhost:3000/docs/](http://localhost:3000/docs/) to visualize the swagger documentation in the browser.
 
 ##### Perform steps 1 to 5 only once you run the project.
 
@@ -40,8 +53,16 @@ Finding the appropriate locations to make exercises could be challenging. Exerci
 
 1. Open Docker Desktop.
 2. Open the terminal in the root repository. It could be the VS Code terminal.
-3. Run ```docker-compose build``` to build the image using the Docker Compose file.
-4. Run ```docker-compose up -d --build``` to construct the container and install the containers inside the project.
+3. Run
+   ```bash
+   docker-compose build
+   ```
+   to build the image using the Docker Compose file.
+5. Run
+   ```bash
+   docker-compose up -d --build
+   ```
+   to construct the container and install the containers inside the project.
    
 ## Database Model
 ![image](https://github.com/user-attachments/assets/b1f658d2-0752-4398-9a5a-0dae03f76f5f)
