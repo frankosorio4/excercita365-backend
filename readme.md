@@ -144,6 +144,22 @@ package-lock.json
 package.json
 readme.md
 ```
+<!--
+## Steps to deploy in render without Docker file (Free version)
+
+- Create the **Postgres** container. By default, render has a template to do that.
+- Set all the environment variables for this container. In Hostname, set the internal hostname used by your Render services. You need to find the string between the @ and the database name in the **Internal Database URL**. Example: postgresql://username:string_1@string_2/database_name. In this case, it is the string 2.
+- Create a new **Web Service** to build and deploy the api.
+- Upload the GitHub project to the Render Web Service. Set the environment variables. Here we have some important cases:
+  - APP_HOST=api_name.onrender.com
+  - DB_HOST= string_2
+  - DB_SSL= true
+- Set the branch **main** to deploy.
+- Set the following commands
+  - Build Command ```npm install```.
+  - Start Command (only first time): ```npm run swagger && npm run start:db && npm run start:prod```.
+  - Start Command: ```npm run swagger && npm run start:prod```.
+-->
 
 ## Improvements
 
