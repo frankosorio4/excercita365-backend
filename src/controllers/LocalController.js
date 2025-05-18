@@ -33,11 +33,15 @@ class LocalController {
           .json({ mensagem: 'O CEP deve conter somente números e ter 8 dígitos.' });
       }
 
-      if (dados.numeroCasa) {
-        if (isNaN(dados.numeroCasa)) {
-          return response
-            .status(400)
-            .json({ mensagem: 'O número da casa deve ser numérico.' });
+      if (dados.numeroCasa) {// skip if dados.numeroCasa is undefined or null
+        dados.numeroCasa = parseInt(dados.numeroCasa);
+
+        if (dados.numeroCasa !== "") {
+          if (isNaN(dados.numeroCasa) || dados.numeroCasa < 0) {
+            return response
+              .status(400)
+              .json({ mensagem: 'O número da casa deve ser numérico.' });
+          }
         }
       }
 
